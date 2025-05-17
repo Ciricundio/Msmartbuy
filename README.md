@@ -8,7 +8,7 @@ Bienvenido al repositorio oficial de **MSmartBuy**, un sistema integral diseñad
 
 ## 📌 Descripción
 
-**MSmartBuy** es una solución digital que permite automatizar procesos comerciales clave en un minimarket, desde la gestión de productos hasta la atención al cliente. A través de una interfaz web y una app móvil, usuarios internos y clientes interactúan con el sistema para realizar compras, controlar inventarios, procesar entregas y más.
+**MSmartBuy** es una solución digital que permite automatizar procesos comerciales clave en un minimarket, desde la gestión de productos hasta la atención al cliente. A través de una interfaz web, usuarios internos y clientes interactúan con el sistema para realizar compras, controlar inventarios, procesar entregas y más.
 
 > 📦 **Cliente:** Compra, consulta estado de pedidos y agrega productos al carrito.  
 > 🚚 **Repartidor:** Entrega productos y gestiona facturas.  
