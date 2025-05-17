@@ -1,0 +1,53 @@
+/* Tipografia de Google */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+@import url('elementos/circle.css');
+@import url('elementos/boton.css');
+@import url('elementos/color.css');
+
+
+html {
+    padding: 0;
+    margin: 0;
+    /* propiedades para centrar vetical y horizontalmente.*/
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center; /* centra verticalmente */
+    height: 100%;
+}
+
+body {
+    font-family: "Nunito", sans-serif;
+    /* propiedades para centrar vetical y horizontalmente.*/
+    display: flex;
+    justify-content: center; /* centra horizontalmente */
+    align-items: center; /* centra verticalmente */
+    height: 100%;
+}
+
+.mt-4{
+    font-family: "nunito";
+    font-weight: 900;
+    font-size: 50px;
+}
+
+.circle{
+    width: 10%;
+}
+
+.buy{
+    color: var(--verde);
+}
+
+.container{
+    display: grid;
+    grid-row: auto auto auto;
+    align-items: center;
+  }
+
+#btn{
+    background-color: var(--verde);
+}
+
+#btn:hover{
+    background-color: var(--verde);
+}

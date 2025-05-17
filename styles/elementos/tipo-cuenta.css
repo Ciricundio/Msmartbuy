@@ -1,0 +1,31 @@
+.container-bottom {
+    background-color: white;
+    padding: 5px 20px 40px 20px ;
+    text-align: center;
+}
+.container p {
+text-align: center;
+margin-bottom: 20px;
+}
+
+.logo-container {
+display: flex;
+justify-content: center;
+gap: 30px;
+margin-bottom: 20px;
+}
+
+.logo {
+width: 60px;
+}
+
+.signup-text {
+text-align: center;
+color: #2196F3;
+font-size: 14px;
+text-decoration: none;
+}
+
+.container a:hover{
+text-decoration: underline;
+}

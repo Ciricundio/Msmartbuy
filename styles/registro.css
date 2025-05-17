@@ -1,0 +1,83 @@
+/* Tipografia de Google */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* Diseño del formulario */
+@import url('elementos/formulario.css');
+/* Diseño del botón */
+@import url('elementos/boton.css');
+/* diseño de tipos de cuenta Google y facebook */
+@import url('elementos/tipo-cuenta.css');
+
+html{
+  padding: 0;
+  margin: 0;
+  height: 100vh;
+  /* propiedades para centrar vetical y horizontalmente.*/
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+body{
+  background-color: #fff;
+  font-family: "Nunito", sans-serif;
+  height: 100vh;
+}
+/* Borde de la dos columnas */
+.row{
+  border: 1px solid #f5f5f5;
+  border-radius: 20px;
+}
+
+.all-space h1{
+  font-weight: 700;
+}
+
+img{
+  width: 100%;
+}
+
+/* div que separa el contenido para usar todo el espacio del padre */
+.all-space{
+  height: 100%;
+  display: grid;
+  grid-row: auto auto auto;
+  align-items: center;
+  background-color: #fff;
+  border-radius: 20px 0 0 20px;
+}
+
+/* H2 Inicio de sesión */
+.container-right h2{
+  font-family: "Nunito";
+  color: #777;
+  font-size: 35px;
+  font-weight: 800;
+}
+
+@media screen and (min-width: 767px){
+
+/* En este media Query se le asigna un ancho al body
+para que no este muy amplio en formulario */
+  body {
+    width: 900px;
+    display: flex;
+    justify-items: center;
+    align-items: center;
+  }
+  /* .all-space es un div que ayuda a diferenciar la culumna
+  izquierda con un color de fondo */ 
+  .all-space{
+    background-color: #f5f5f5;
+  }
+  /* Esta clase pertenece a una etiqueta (p) la cual
+  solo se muestra cuando la pantalla es bastante ancha
+  y aparece en la parte inferior de la imgen */
+  .p-inferior{
+    font-weight: 700; /* font-weight de google, rango(200-1000) */
+    color: #888;
+  }
+/* se el quita la sombra al div con clase formulario */
+  .formulario{
+    box-shadow: none;
+  }
+}

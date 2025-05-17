@@ -1,0 +1,93 @@
+/* Tipografia de Google */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+
+@import url('elementos/boton.css');
+
+@import url('elementos/color.css');
+
+
+html {
+    padding: 0;
+    margin: 0;
+    height: 100vh;
+    align-content: center;
+}
+
+body {
+    margin: 0;
+    background-color: #fff;
+}
+
+.container{
+    display: grid;
+    justify-items: center;
+}
+
+img {
+    width: 20%;
+}
+
+form{
+    justify-items: center;
+}
+
+.picker-wrapper {
+    position: relative;
+    height: 120px;
+    width: 70%;
+    margin: 30px 0;
+    overflow: hidden;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+    text-align: center;
+}
+
+/*.picker-option{
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;
+}*/
+
+.picker {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+}
+
+.picker-column {
+    width: 32%;
+    height: 120px;
+    overflow-y: scroll;
+    scroll-snap-type: y mandatory;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.picker-column::-webkit-scrollbar {
+    display: none;
+}
+
+.picker-option {
+    height: 40px;
+    line-height: 40px;
+    font-size: 16px;
+    color: gray;
+    scroll-snap-align: center;
+    font-family: "Nunito", sans-serif;
+}
+
+.picker-column .selected {
+    font-size: 20px;
+    font-weight: bold;
+    color: black;
+}
+
+.highlight {
+    position: absolute;
+    top: 40px;
+    left: 0;
+    right: 0;
+    height: 40px;
+    border-top: 1px solid #ccc;
+    border-bottom: 1px solid #ccc;     
+    pointer-events: none;
+}

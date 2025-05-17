@@ -1,0 +1,42 @@
+/* Tipografia de Google */
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&display=swap');
+/* Circulos decorativos */
+@import url('elementos/circle.css');
+/* Diseño del botón */
+@import url('elementos/boton.css');
+
+html {
+  padding: 0;
+  margin: 0;
+  /* propiedades para centrar vetical y horizontalmente.*/
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center; /* centra verticalmente */
+  height: 100%;
+}
+
+body {
+  font-family: "Nunito", sans-serif;
+  /* propiedades para centrar vetical y horizontalmente.*/
+  display: flex;
+  justify-content: center; /* centra horizontalmente */
+  align-items: center; /* centra verticalmente */
+}
+
+.container{
+  display: grid;
+  grid-row: auto auto auto;
+  align-items: center;
+}
+
+/* H1 ¡HOLA! */
+.mt-4{
+  font-family: "nunito";
+  font-weight: 1000;
+  font-size: 50px;
+}
+
+p {
+  color: #888;
+  font-size: 18px;
+}
