@@ -1,0 +1,21 @@
+/* sobre escrito del boton en los detalles */
+#btn {
+  border-radius: 15px;
+  width: 349px;
+  border: none;
+  color: #fff;
+  background-color: #aaa;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+#btn:hover{
+  background-color: #999;
+}
+
+#link{
+  text-decoration: none;
+}
+
+#link:hover{
+  text-decoration: underline;
+}

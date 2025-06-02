@@ -1,0 +1,74 @@
+
+/* Tamaños responsivos */
+@media (max-width: 576px) { /* Pantallas pequeñas */
+    /* Circulos laterales */
+    .circle-sm {
+        width: 40%;
+    }
+    /* Circulo central */
+    .circle-sm-centro {
+        width: 80%;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    img {
+        width: 75%;
+      }
+    
+}
+
+@media (min-width: 577px) and (max-width: 768px) { /* Pantallas medianas */
+    /* Circulos laterales */
+    .circle-md {
+        width: 35%;
+    }
+    /* Circulo central */
+    .circle-md-centro {
+        width: 45%;
+        top: 42%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    img {
+        width: 50%;
+      }
+}
+
+@media (min-width: 769px) and (max-width: 1200px) { /* Pantallas grandes */
+    /* Circulos laterales */
+    .circle-lg {
+        width: 25%;
+    }
+    /* Circulo central */
+    .circle-xl-centro {
+        width: 30%;
+        top: 42%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    img {
+        width: 40%;
+      }
+}
+
+@media (min-width: 1201px) { /* Pantallas extra grandes */
+    /* Circulos laterales */
+    .circle-xl {
+        width: 23%;
+    }
+    /* Circulo central */
+    .circle-xl-centro {
+        width: 28%;
+        top: 45%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+    }
+
+    img {
+        width: 50%;
+      }
+}
