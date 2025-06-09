@@ -18,6 +18,8 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
     <!-- Incluir Font Awesome para los iconos -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
+    <!--Boostrap-->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=close" />
 
 </head>
@@ -163,7 +165,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                         <div class="col">
                             <div class="card h-100 border-0 shadow-sm">
                             <div class="position-relative p-3 pb-0">
-                                <img src="<?= $p['imagen'] ?>" class="card-img-top img-fluid" style="max-height: 100px; object-fit: contain;">
+                                <img src="<?= $p['foto'] ?>" class="card-img-top img-fluid" style="max-height: 100px; object-fit: contain;">
                                 <button class="btn btn-light rounded-circle position-absolute top-0 end-0 m-2 shadow-sm">
                                 ❤️
                                 </button>
@@ -171,7 +173,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                             <div class="card-body">
                                 <small class="text-uppercase text-muted"><?= strtoupper($p['marca']) ?></small>
                                 <h6 class="card-title"><?= $p['nombre'] ?></h6>
-                                <p class="mb-1 fw-bold text-dark">$ <?= number_format($p['f_final_oferta'], 0, ',', '.') ?></p>
+                                <p class="mb-1 fw-bold text-dark">Fin de oferta:  <?= $p['f_final_oferta'] ?></p>
                                 <small class="text-muted text-decoration-line-through">$ <?= number_format($p['precio_unitario'], 0, ',', '.') ?></small>
                                 <span class="ms-2 text-success fw-bold"><?= $p['descuento'] ?>%</span>
                             </div>
