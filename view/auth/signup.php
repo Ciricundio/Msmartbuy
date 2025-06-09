@@ -136,6 +136,6 @@
     </div>
 </body>
 
-<script src="../../controller/auth/signup.js"></script>
+<script src="../../controller/auth/password_verification.js"></script>
 
 </html>
