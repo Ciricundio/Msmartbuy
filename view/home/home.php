@@ -170,9 +170,9 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                             </div>
                             <div class="card-body">
                                 <small class="text-uppercase text-muted"><?= strtoupper($p['marca']) ?></small>
-                                <h6 class="card-title"><?= $p['nombre_producto'] ?></h6>
-                                <p class="mb-1 fw-bold text-dark">$ <?= number_format($p['precio_final'], 0, ',', '.') ?></p>
-                                <small class="text-muted text-decoration-line-through">$ <?= number_format($p['precio_original'], 0, ',', '.') ?></small>
+                                <h6 class="card-title"><?= $p['nombre'] ?></h6>
+                                <p class="mb-1 fw-bold text-dark">$ <?= number_format($p['f_final_oferta'], 0, ',', '.') ?></p>
+                                <small class="text-muted text-decoration-line-through">$ <?= number_format($p['precio_unitario'], 0, ',', '.') ?></small>
                                 <span class="ms-2 text-success fw-bold"><?= $p['descuento'] ?>%</span>
                             </div>
                             <div class="card-footer bg-transparent border-0">
