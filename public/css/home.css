@@ -1,4 +1,5 @@
 @import url('elements/color.css');
+@import url('elements/footer.css');
 
 /* Reset y estilos generales */
 * {
@@ -131,6 +132,8 @@ body {
 /* Main Container */
 .main-container{
   background-color: #fafafa;
+  width: 60%;
+  margin: auto;
 }
 
 /* Sidebar */
@@ -217,7 +220,6 @@ body {
 /* Main Content */
 .main-content {
   padding: 24px;
-  width: 55%;
   justify-self: center;
 }
 
