@@ -243,6 +243,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                         </div>
                     </div>
                 </div>
+
             </main>
 
             <!-- Right Sidebar - Favorites -->
@@ -296,6 +297,8 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 </div>
             </aside>
 
+            <?php require '../template/footer.php'?>
+            
         </div>
 
     </div>
