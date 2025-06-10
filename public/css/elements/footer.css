@@ -1,0 +1,57 @@
+@import url('color.css');
+
+footer{
+    background-color: #fefefe;
+    color: var(--text-footer);
+}
+
+img{
+    width: 15%;
+}
+
+.msb-text{
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--text-footer);
+}
+
+footer p{
+    font-size: 13px;
+}
+
+.link a{
+    font-size: 13px;
+    color: var(--text-footer);
+    text-decoration: none;
+    margin-right: 6px;
+}
+
+.link a:hover{
+    text-decoration: underline;
+}
+
+.parent {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-template-rows: repeat(3, 1fr);
+    gap: 8px;
+    padding: 6%;
+}
+    
+.div1 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+}
+
+.div2 {
+    grid-column: span 2 / span 2;
+    grid-row: span 2 / span 2;
+    grid-column-start: 3;
+    text-align: right;
+}
+
+.div3 {
+    grid-column: span 4 / span 4;
+    grid-row-start: 3;
+}
+        
