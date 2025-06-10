@@ -166,8 +166,8 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                             <div class="card h-100 border-0 shadow-sm">
                             <div class="position-relative p-3 pb-0">
                                 <img src="<?= $p['foto'] ?>" class="card-img-top img-fluid" style="max-height: 100px; object-fit: contain;">
-                                <button class="btn btn-light rounded-circle position-absolute top-0 end-0 m-2 shadow-sm">
-                                ❤️
+                                <button class="favorite-button">
+                                <i class="far fa-heart"></i>
                                 </button>
                             </div>
                             <div class="card-body">
