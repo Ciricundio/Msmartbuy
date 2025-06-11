@@ -1,4 +1,8 @@
-<?php require '../../controller/security/secure_login.php'; ?>
+<?php
+require '../../controller/security/secure_login.php';
+
+$rol = $_SESSION['rol'] ?? 'Invitado'; 
+?>
 
 <!DOCTYPE html>
 <html lang="es">
@@ -18,17 +22,48 @@
         <div class="bienvenida">
             <h1 class="texto-bienvenido mt-2">
                 <span class="up">Bienvenido A</span>
-                <br>
+                <br> 
                 <span class="ms">MSmart<span class="buy">Buy</span></span>
             </h1>
         </div>
         <div class="ilustracion">
-            <img src="../../public/img/ilustraciones/Bienvenida/cliente.svg" alt="Amigos juntos">
+            <?php 
+                switch ($rol){
+                    case "cliente":
+                        echo '<img src="../../public/img/Ilustraciones/Bienvenida/cliente.svg">';
+                    break;
+
+                    case "admin":
+                        echo '<img src="../../public/img/Ilustraciones/Bienvenida/admin.svg">';
+                    break;
+
+                    default:
+                    echo "¡Ojo con lo que haces!";
+
+                }
+                 
+                ?>
         </div>
 
         <div class="botones_inferiores">
 
-            <button class="p-2 fw-bold my-3" id="btn" onclick="window.location.href='home.php'">INICIO</button>
+            <button class="p-2 fw-bold my-3" id="btn" 
+            <?php 
+                switch ($rol){
+                    case "cliente":
+                        echo "onclick=\"window.location.href='home.php'\"";
+                    break;
+
+                    case "admin":
+                        echo "onclick=\"window.location.href='home.php'\"";
+                    break;
+
+                    default:
+                    echo "¡Ojo con lo que haces!";
+
+                }
+            ?>
+            >INICIO</button>
             </br>
             <a class="text-muted fw-bold" id="link" href="#">Más sobre Msmartbuy</a>
             
