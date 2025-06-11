@@ -29,20 +29,10 @@ body {
     font-size: 50px;
 }
 
-.buy{
-    color: var(--verde);
-}
-
 .container{
     display: grid;
     grid-row: auto auto auto;
     align-items: center;
   }
 
-#btn{
-    background-color: var(--verde);
-}
 
-#btn:hover{
-    background-color: var(--verde);
-}
