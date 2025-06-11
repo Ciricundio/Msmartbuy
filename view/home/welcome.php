@@ -23,7 +23,26 @@ $rol = $_SESSION['rol'] ?? 'Invitado';
             <h1 class="texto-bienvenido mt-2">
                 <span class="up">Bienvenido A</span>
                 <br> 
-                <span class="ms">MSmart<span class="buy">Buy</span></span>
+                <span class="ms">MSmart
+                    <span class="buy" 
+                    <?php 
+                    switch ($rol){
+                        case "cliente":
+                            echo "style='color: var(--verde);'";
+                        break;
+
+                        case "admin":
+                            echo "style='color: var(--lila);'";
+                        break;
+
+                        default:
+                        echo "¡Ojo con lo que haces!";
+
+                    }
+                ?>
+                >Buy
+                    </span>
+                </span>
             </h1>
         </div>
         <div class="ilustracion">
@@ -52,10 +71,12 @@ $rol = $_SESSION['rol'] ?? 'Invitado';
                 switch ($rol){
                     case "cliente":
                         echo "onclick=\"window.location.href='home.php'\"";
+                        echo "style='background-color: var(--verde);'";
                     break;
 
                     case "admin":
-                        echo "onclick=\"window.location.href='home.php'\"";
+                        echo "onclick=\"window.location.href='../../role/admin/view/home/ad_home.php'\"";
+                        echo "style='background-color: var(--lila);'";
                     break;
 
                     default:
