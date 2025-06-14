@@ -58,16 +58,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $sql_ubicacion = "INSERT INTO ubicacion (zona) VALUES (?)";
             $stmt_ubicacion = $conn->prepare($sql_ubicacion);
             $stmt_ubicacion->bind_param("s", $_SESSION['zona']);
-            
+
             if ($stmt_ubicacion->execute()) {
                 $id_ubicacion = $stmt_ubicacion->insert_id;
-                
+
                 // Insertar en la tabla de relación usuario_ubicacion
                 $sql_relacion = "INSERT INTO usuario_ubicacion (usuario_ID, ubicacion_ID) VALUES (?, ?)";
                 $stmt_relacion = $conn->prepare($sql_relacion);
                 $stmt_relacion->bind_param("ii", $id_usuario, $id_ubicacion);
                 $stmt_relacion->execute();
-                
+
                 session_destroy(); // Limpiar datos
                 header("Location: ../../view/home/welcome.php");
             } else {
