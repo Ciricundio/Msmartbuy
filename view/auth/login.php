@@ -9,7 +9,10 @@
     <link rel="stylesheet" href="../../public/css/login.css">
 <!--Boostrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+<!-- Iconos de Material Symbols -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=visibility_off" />
 
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200&icon_names=ver" />
     
 </head>
 <body>
@@ -48,9 +51,12 @@
                                         <input type="email" name="email" id="email" placeholder="Example@gmail.com" required>
                                     </div>
 
-                                    <div class="mt-3 ">
-                                        <label class="text d-flex aling-self-center ps-2" for="pasword">Contraseña</label>
+                                    <div class="mt-3 position-relative">
+                                        <label class="text d-flex align-self-center ps-2" for="password">Contraseña</label>
                                         <input type="password" class="passwords" name="pasword" id="password" placeholder="*******" required>
+                                        <span class="material-symbols-outlined" id="togglePassword" style="cursor: pointer; position: absolute; top: 50%; right: 10px;">
+                                        visibility_off
+                                        </span>
                                     </div>
                                 </div> 
 
@@ -89,5 +95,7 @@
         </div>
 
     <footer></footer>
+
+    <script src="../../public/js/eye.js"></script>
 </body>
 </html>
