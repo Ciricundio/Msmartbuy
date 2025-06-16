@@ -83,4 +83,14 @@ document.addEventListener('DOMContentLoaded', () => {
           }
       });
   });
+
+  boton.addEventListener('click', (e) => {
+    const rolSeleccionado = localStorage.getItem('rol');
+
+    if (rolSeleccionado === 'proveedor' || rolSeleccionado === 'repartidor') {
+        e.preventDefault(); // Evita que el formulario se envíe
+        document.getElementById('modalAdvertencia').style.display = 'flex';
+    }
+});
+
 });
