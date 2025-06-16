@@ -68,6 +68,13 @@
         </form> 
 
     </div>
+
+    <div id="modalAdvertencia" class="modal" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(0,0,0,0.6); z-index:1000; justify-content:center; align-items:center;">
+        <div style="background:white; padding:20px 30px; border-radius:10px; text-align:center; max-width:300px;">
+            <p style="margin-bottom: 20px;">Esta opción aún no está habilitada.</p>
+            <button  class="p-2 fw-bold mb-2 w-75" onclick="document.getElementById('modalAdvertencia').style.display='none'" id="btn">Cerrar</button>
+        </div>
+    </div>
     
     <script type="module" src="../../public/js/section.js"></script> 
 </body>
