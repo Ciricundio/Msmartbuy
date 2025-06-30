@@ -113,7 +113,7 @@ CREATE TABLE IF NOT EXISTS `msmartbuy`.`producto` (
   `sku` VARCHAR(45) NOT NULL,
   `f_inicio_oferta` DATE NULL,
   `f_final_oferta` DATE NULL,
-  `foto` VARCHAR(45) NULL,
+  `foto` VARCHAR(50) NULL,
   `peso` VARCHAR(45) NOT NULL,
   `estado` VARCHAR(45) NOT NULL,
   `precio_unitario` DECIMAL(10, 2) NOT NULL, -- Cambiado a DECIMAL para precios
