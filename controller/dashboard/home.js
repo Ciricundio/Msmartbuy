@@ -40,10 +40,13 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // Manejar los botones de agregar al carrito
   const addButtons = document.querySelectorAll(".add-button")
+  const card = document.querySelectorAll(".product-card")
+
 
   addButtons.forEach((button) => {
     button.addEventListener("click", () => {
       // Aquí se podría implementar la lógica para agregar al carrito
+      addButtons.classList.add("orange");
       alert("Producto agregado al carrito")
     })
   })
