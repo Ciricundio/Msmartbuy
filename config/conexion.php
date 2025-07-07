@@ -2,7 +2,7 @@
 // Datos de conexión a la base de datos
 $servername = "localhost";
 $username = "root";
-$password = "cir010";
+$password = "LLy01215c";
 $dbname = "msmartbuy";
 
 // Método 1: Conexión mediante MySQLi orientado a objetos
