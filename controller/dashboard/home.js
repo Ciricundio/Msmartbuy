@@ -2,7 +2,7 @@ document.addEventListener("DOMContentLoaded", () => {
   // Manejar los botones de favoritos
   const favoriteButtons = document.querySelectorAll(".favorite-button")
 
-  favoriteButtons.forEach((button) => {
+/*   favoriteButtons.forEach((button) => {
     button.addEventListener("click", function () {
       this.classList.toggle("active")
 
@@ -16,7 +16,7 @@ document.addEventListener("DOMContentLoaded", () => {
         icon.classList.add("far")
       }
     })
-  })
+  }) */
 
   // Manejar los botones de navegación
   const navButtons = document.querySelectorAll(".nav-button")
@@ -38,16 +38,6 @@ document.addEventListener("DOMContentLoaded", () => {
     })
   })
 
-  // Manejar los botones de agregar al carrito
-  const addButtons = document.querySelectorAll(".add-button")
-  const card = document.querySelectorAll(".product-card")
-
-
-  addButtons.forEach((button) => {
-    button.addEventListener("click", () => {
-      // Aquí se podría implementar la lógica para agregar al carrito
-      addButtons.classList.add("orange");
-      alert("Producto agregado al carrito")
-    })
-  })
+  // Los botones de agregar al carrito ahora son manejados por toggleCartProduct()
+  // en home.php, así que removemos esta funcionalidad duplicada
 })
