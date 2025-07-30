@@ -1,14 +1,13 @@
 <?php
 session_start();
+include_once '../../../config/conexion.php';
 header('Content-Type: application/json');
 
 // Verificar autenticación y rol
-if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'Administrador') {
+if (!isset($_SESSION['ID']) && !isset($_SESSION['rol'])!== 'admin') {
     echo json_encode(['success' => false, 'message' => 'No autorizado']);
     exit();
 }
-
-include_once 'conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Sanitizar y validar datos
@@ -16,6 +15,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $marca = trim($_POST['marca']);
     $cantidad = intval($_POST['cantidad']);
     $descripcion = trim($_POST['descripcion']);
+    $sku = trim($_POST['sku']);
     $precio_unitario = floatval($_POST['precio_unitario']);
     $peso = floatval($_POST['peso']);
     $estado = trim($_POST['estado']);
@@ -60,29 +60,25 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
     
     // Insertar producto en la base de datos
-    $insert_query = "INSERT INTO producto (nombre, marca, cantidad, descripcion, precio_unitario, peso, estado, foto, categoria_ID, proveedor_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-    $insert_stmt = mysqli_prepare($conexion, $insert_query);
-    mysqli_stmt_bind_param($insert_stmt, "ssisdssiii", $nombre, $marca, $cantidad, $descripcion, $precio_unitario, $peso, $estado, $foto_nombre, $categoria_ID, $proveedor_ID);
+    $insert_query = "INSERT INTO producto (nombre, marca, cantidad, descripcion, sku, precio_unitario, peso, estado, foto, categoria_ID, proveedor_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+    $insert_stmt = mysqli_prepare($conn, $insert_query);
+    mysqli_stmt_bind_param($insert_stmt, "ssisdsssiii", $nombre, $marca, $cantidad, $descripcion, $sku, $precio_unitario, $peso, $estado, $foto_nombre, $categoria_ID, $proveedor_ID);
     
     if (mysqli_stmt_execute($insert_stmt)) {
-        $producto_id = mysqli_insert_id($conexion);
-        echo json_encode([
-            'success' => true, 
-            'message' => 'Producto agregado exitosamente',
-            'producto_id' => $producto_id
-        ]);
+        $producto_id = mysqli_insert_id($conn);
+        header("Location: ../view/home/ad_home.php");;
     } else {
         // Si hay error, eliminar la imagen subida
         if ($foto_nombre && file_exists($ruta_destino)) {
             unlink($ruta_destino);
         }
-        echo json_encode(['success' => false, 'message' => 'Error al agregar el producto: ' . mysqli_error($conexion)]);
+        echo json_encode(['success' => false, 'message' => 'Error al agregar el producto: ' . mysqli_error($conn)]);
     }
     
     mysqli_stmt_close($insert_stmt);
 } else {
-    echo json_encode(['success' => false, 'message' => 'Método no permitido']);
+    header("Location: ../view/home/ad_home.php");;
 }
 
-mysqli_close($conexion);
+mysqli_close($conn);
 ?>

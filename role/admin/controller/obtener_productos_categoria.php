@@ -1,14 +1,13 @@
 <?php
 session_start();
+include_once '../../../../config/conexion.php';
 header('Content-Type: application/json');
 
 // Verificar autenticación y rol
-if (!isset($_SESSION['usuario_id']) || $_SESSION['rol'] !== 'Administrador') {
+if (!isset($_SESSION['ID']) || !isset($_SESSION['rol'])!== 'admin') {
     echo json_encode(['success' => false, 'message' => 'No autorizado']);
     exit();
 }
-
-include_once 'conexion.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['categoria_id'])) {
     $categoria_id = intval($_GET['categoria_id']);
@@ -19,8 +18,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['categoria_id'])) {
     }
     
     // Obtener información de la categoría
-    $categoria_query = "SELECT categoria FROM categoria WHERE categoria_ID = ?";
-    $categoria_stmt = mysqli_prepare($conexion, $categoria_query);
+    $categoria_query = "SELECT * FROM categoria WHERE ID = ?";
+    $categoria_stmt = mysqli_prepare($conn, $categoria_query);
     mysqli_stmt_bind_param($categoria_stmt, "i", $categoria_id);
     mysqli_stmt_execute($categoria_stmt);
     $categoria_result = mysqli_stmt_get_result($categoria_stmt);
@@ -32,12 +31,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['categoria_id'])) {
     }
     
     // Obtener productos de la categoría
-    $productos_query = "SELECT p.producto_ID, p.nombre, p.marca, p.cantidad, p.precio_unitario, p.foto, p.estado, u.nombre as proveedor_nombre 
-                       FROM producto p 
-                       LEFT JOIN usuario u ON p.proveedor_ID = u.usuario_ID 
-                       WHERE p.categoria_ID = ? 
-                       ORDER BY p.nombre ASC";
-    $productos_stmt = mysqli_prepare($conexion, $productos_query);
+    $productos_query = "SELECT p.ID AS producto_ID, p.nombre, p.marca, p.cantidad, p.precio_unitario, 
+                               p.foto, p.estado, u.nombre AS proveedor_nombre 
+                        FROM producto p 
+                        LEFT JOIN usuario u ON p.proveedor_ID = u.ID 
+                        WHERE p.categoria_ID = ? 
+                        ORDER BY p.nombre ASC";
+    $productos_stmt = mysqli_prepare($conn, $productos_query);
     mysqli_stmt_bind_param($productos_stmt, "i", $categoria_id);
     mysqli_stmt_execute($productos_stmt);
     $productos_result = mysqli_stmt_get_result($productos_stmt);
@@ -68,5 +68,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET' && isset($_GET['categoria_id'])) {
     echo json_encode(['success' => false, 'message' => 'Parámetros inválidos']);
 }
 
-mysqli_close($conexion);
+mysqli_close($conn);
 ?>

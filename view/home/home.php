@@ -214,11 +214,11 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             position: relative;
             height: 180px;
             overflow: hidden;
+            width: 100%;
         }
 
         .product-card-horizontal .product-image img {
-            width: 100%;
-            height: 100%;
+            width: 80%;
             object-fit: cover;
         }
 
@@ -339,9 +339,13 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     <i class="fas fa-home"></i>
                     Inicio
                 </button>
+                <button class="nav-button" onclick="window.location.href='../compras/carrito.php'">
+                    <i class="fas fa-shopping-cart"></i>
+                    Mi carrito
+                </button>
                 <button class="nav-button">
-                    <i class="fas fa-bell"></i>
-                    Notificaciones
+                    <i class="fas fa-heart"></i>
+                    Mis favoritos
                 </button>
                 <button class="nav-button" onclick="window.location.href='../compras/mis_compras.php'">
                     <i class="fas fa-shopping-bag"></i>
@@ -352,15 +356,6 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     Categorías
                 </button>
 
-                <button class="nav-button">
-                    <i class="fas fa-map-marker-alt"></i>
-                    Mi ubicación
-                </button>
-
-                <button class="nav-button">
-                    <i class="fas fa-user"></i>
-                    Soporte
-                </button>
             </nav>
 
             <!-- User Profile -->
@@ -395,44 +390,6 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     </div>
                 </div>
 
-                <div class="header-actions bordear">
-                    <button class="icon-button" id="cart-button" title="Ver carrito">
-                        <i class="fas fa-shopping-cart"></i>
-                        <span id="cart-count" style="
-                            position: absolute;
-                            top: -5px;
-                            right: -5px;
-                            background: #e74c3c;
-                            color: white;
-                            border-radius: 50%;
-                            width: 18px;
-                            height: 18px;
-                            font-size: 10px;
-                            display: none;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: bold;
-                        "></span>
-                    </button>
-                    <button class="icon-button" id="favorites-button" title="Ver favoritos">
-                        <i class="fas fa-heart"></i>
-                        <span id="favorites-count" style="
-                            position: absolute;
-                            top: -5px;
-                            right: -5px;
-                            background: #e74c3c;
-                            color: white;
-                            border-radius: 50%;
-                            width: 18px;
-                            height: 18px;
-                            font-size: 10px;
-                            display: none;
-                            align-items: center;
-                            justify-content: center;
-                            font-weight: bold;
-                        "></span>
-                    </button>
-                </div>
             </div>
         </div>
 
@@ -487,7 +444,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                         <?php foreach ($productos as $p): ?>
                             <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
                                 <div class="product-image">
-                                    <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
+                                    <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['foto'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
                                         <i class="far fa-heart"></i>
                                     </button>
@@ -522,14 +479,14 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             ?>
             <section class="container mt-5">
                 <div class="section-header">
-                    <h2 class="section-title">✨ Productos Nuevos</h2>
+                    <h2 class="section-title">Productos Nuevos</h2>
                     <a href="#" class="section-link">mostrar todos</a>
                 </div>
 
                 <div class="products-scroll-container">
                     <div class="products-horizontal-list">
                         <?php foreach ($productosNuevos as $p): ?>
-                            <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
+                            <div class="product-card" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
                                 <div class="product-image">
                                     <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
@@ -572,14 +529,14 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             ?>
             <section class="container mt-5">
                 <div class="section-header">
-                    <h2 class="section-title">🏆 Más Populares</h2>
+                    <h2 class="section-title">Más Populares</h2>
                     <a href="#" class="section-link">mostrar todos</a>
                 </div>
 
                 <div class="products-scroll-container">
                     <div class="products-horizontal-list">
                         <?php foreach ($productosPopulares as $p): ?>
-                            <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
+                            <div class="product-card" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
                                 <div class="product-image">
                                     <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
@@ -616,14 +573,14 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             ?>
             <section class="container mt-5 mb-5">
                 <div class="section-header">
-                    <h2 class="section-title">🛍️ Todos los Productos</h2>
+                    <h2 class="section-title">Todos los Productos</h2>
                     <a href="#" class="section-link">mostrar todos</a>
                 </div>
 
                 <div class="products-scroll-container">
                     <div class="products-horizontal-list">
                         <?php foreach ($todosProdutos as $p): ?>
-                            <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
+                            <div class="product-card" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer; width: 150px;">
                                 <div class="product-image">
                                     <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
@@ -657,21 +614,19 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
 
         <?php require '../template/footer.php' ?>
 
-    </div>
-
-    <!-- Product Modal -->
-    <div id="product-modal" class="product-modal-overlay">
+            <!-- Product Modal -->
+ <!--  <div id="product-modal" class="product-modal-overlay">
         <div class="product-modal-content">
             <button class="modal-close">&times;</button>
             <div class="modal-body">
                 <div class="product-detail-layout">
                     <div class="product-image-section">
-                        <img id="modal-product-image" src="../../public/img/products/<?= $p['foto'] ?>" alt="" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px;">
+                        <img id="modal-product-image" src="../../public/img/products/<?= $productosNuevos['foto'] ?>" alt="" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px;">
                     </div>
                     <div class="product-info-section">
-                        <h1 id="modal-product-name" style="margin: 0 0 10px 0; color: #333;"> <?= $p['nombre'] ?></h1>
-                        <p id="modal-product-brand" style="color: #666; margin: 0 0 15px 0;"> <?= strtoupper($p['marca']) ?></p>
-                        <p id="modal-product-description" style="color: #555; line-height: 1.6; margin-bottom: 20px;"> <?= $p['descripcion'] ?></p>
+                        <h1 id="modal-product-name" style="margin: 0 0 10px 0; color: #333;"> <?= $productosNuevos['nombre'] ?></h1>
+                        <p id="modal-product-brand" style="color: #666; margin: 0 0 15px 0;"> <?= strtoupper($productosNuevos['marca']) ?></p>
+                        <p id="modal-product-description" style="color: #555; line-height: 1.6; margin-bottom: 20px;"> <?= $productosNuevos['descripcion'] ?></p>
 
                         <div class="price-display" style="margin-bottom: 20px;">
                             <span id="modal-product-price" style="font-size: 24px; font-weight: bold; color: #ff6b35;"></span>
@@ -679,9 +634,9 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                         </div>
 
                         <div class="product-details" style="margin-bottom: 25px;">
-                            <p><strong>SKU:</strong> <span id="modal-product-sku"> <?= $p['sku'] ?></span></p>
-                            <p><strong>Estado:</strong> <span id="modal-product-stock"> <?= $p['estado'] ?></span></p>
-                            <p><strong>Peso:</strong> <span id="modal-product-weight"> <?= $p['peso'] ?> gr</span></p>
+                            <p><strong>SlU:</strong> <span id="modal-product-sku"> <?= $productosNuevos['sku'] ?></span></p>
+                            <p><strong>Estado:</strong> <span id="modal-product-stock"> <?= $productosNuevos['estado'] ?></span></p>
+                            <p><strong>Peso:</strong> <span id="modal-product-weight"> <?= $productosNuevos['peso'] ?> gr</span></p>
                         </div>
 
                         <div class="action-buttons" style="display: flex; gap: 15px; flex-direction: column;">
@@ -692,9 +647,10 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 </div>
             </div>
         </div>
-
-
+    </div> -->
     </div>
+
+
 
 
             <!-- React Aside Components Container -->
@@ -811,6 +767,8 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 }
             }, 500);
         });
+
+
     </script>
 
     <script src="../../public/js/product-search.js"></script>

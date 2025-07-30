@@ -86,7 +86,7 @@ $rol = $_SESSION['rol'] ?? 'Invitado';
             ?>
             >INICIO</button>
             </br>
-            <a class="text-muted fw-bold" id="link" href="#">Más sobre Msmartbuy</a>
+            <a class="text-muted fw-bold" id="link" href="../../README.md">Más sobre Msmartbuy</a>
             
         </div>
         

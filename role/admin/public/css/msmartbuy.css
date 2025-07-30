@@ -2,16 +2,12 @@
 :root {
   --primary-color: #7242d6;
   --secondary-color: #05180d;
-  --background-color: #f8f8f8;
-  --white: #ffffff;
-  --gray-light: #e5e5e5;
+
   --gray-medium: #999999;
   --gray-dark: #333333;
   --success-color: #28a745;
   --danger-color: #dc3545;
   --warning-color: #ffc107;
-  --border-radius: 12px;
-  --shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
   --shadow-hover: 0 8px 15px rgba(0, 0, 0, 0.2);
   --transition: all 0.3s ease;
 }
@@ -21,6 +17,10 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+}
+
+.logo{
+  width: 50%;
 }
 
 body {
@@ -52,11 +52,6 @@ body {
   gap: 1rem;
 }
 
-.sidebar-header .logo {
-  width: 40px;
-  height: 40px;
-  filter: brightness(0) invert(1);
-}
 
 .sidebar-header h2 {
   font-size: 1.5rem;
@@ -188,63 +183,6 @@ body {
   color: var(--white);
 }
 
-/* Grid de categorías */
-.categorias-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-  gap: 2rem;
-  padding: 1rem 0;
-}
-
-.categoria-card {
-  width: 220px;
-  height: 220px;
-  border-radius: var(--border-radius);
-  overflow: hidden;
-  cursor: pointer;
-  transition: var(--transition);
-  box-shadow: var(--shadow);
-  position: relative;
-}
-
-.categoria-card:hover {
-  transform: translateY(-5px);
-  box-shadow: var(--shadow-hover);
-}
-
-.categoria-background {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-  filter: blur(2px);
-  transform: scale(1.1);
-}
-
-.categoria-overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: linear-gradient(135deg, rgba(114, 66, 214, 0.8), rgba(5, 24, 13, 0.8));
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-  padding: 1rem;
-}
-
-.categoria-overlay h3 {
-  color: var(--white);
-  font-size: 1.2rem;
-  font-weight: 600;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
-}
 
 /* Contenedor de productos */
 .productos-container {
@@ -497,35 +435,7 @@ form {
   animation: spin 1s linear infinite;
 }
 
-/* Animaciones */
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
-}
 
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-@keyframes spin {
-  0% {
-    transform: rotate(0deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
-}
 
 /* Responsive */
 @media (max-width: 768px) {
@@ -554,16 +464,6 @@ form {
     justify-content: center;
   }
 
-  .categorias-grid {
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 1rem;
-  }
-
-  .categoria-card {
-    width: 100%;
-    height: 180px;
-  }
-
   .productos-grid {
     grid-template-columns: 1fr;
   }
@@ -575,24 +475,5 @@ form {
   .modal {
     width: 95%;
     margin: 1rem;
-  }
-}
-
-@media (max-width: 480px) {
-  .categorias-grid {
-    grid-template-columns: 1fr;
-  }
-
-  .categoria-card {
-    height: 150px;
-  }
-
-  .form-actions {
-    flex-direction: column;
-  }
-
-  .btn {
-    width: 100%;
-    justify-content: center;
   }
 }

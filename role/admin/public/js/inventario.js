@@ -5,7 +5,10 @@ let currentCategoryId = null
 // Inicialización cuando el DOM está listo
 document.addEventListener("DOMContentLoaded", () => {
   initializeEventListeners()
-  loadCategorias()
+  // Configurar los listeners para las tarjetas de categoría que ya están en el HTML
+  setupCategoriaCardListeners()
+  // Si quieres que las categorías se recarguen dinámicamente al cargar la página, descomenta la siguiente línea:
+  loadCategorias();
 })
 
 // Configurar todos los event listeners
@@ -20,30 +23,32 @@ function initializeEventListeners() {
   document.getElementById("formProducto").addEventListener("submit", handleProductoSubmit)
 
   // Cerrar modales
-  document.querySelectorAll(".modal-close, [data-modal]").forEach((element) => {
+  document.querySelectorAll(".modal-close, .modal-overlay").forEach((element) => {
     element.addEventListener("click", function (e) {
-      if (e.target === this) {
+      // Asegurarse de que el clic sea en el overlay o en el botón de cierre
+      if (e.target === this || e.target.classList.contains('modal-close')) {
         const modalId = this.getAttribute("data-modal") || this.closest(".modal-overlay").id
         closeModal(modalId)
       }
     })
   })
 
-  // Cerrar modal al hacer clic fuera
-  document.querySelectorAll(".modal-overlay").forEach((overlay) => {
-    overlay.addEventListener("click", function (e) {
-      if (e.target === this) {
-        closeModal(this.id)
-      }
-    })
-  })
-
-  // Navegación del sidebar
+  // Navegación del sidebar (si se implementa un sidebar real)
   document.querySelectorAll(".nav-link").forEach((link) => {
     link.addEventListener("click", function (e) {
       e.preventDefault()
       const section = this.getAttribute("data-section")
       handleNavigation(section)
+    })
+  })
+}
+
+// Configurar listeners para las tarjetas de categoría existentes en el DOM
+function setupCategoriaCardListeners() {
+  document.querySelectorAll(".categoria-card").forEach((card) => {
+    card.addEventListener("click", function () {
+      const categoriaId = this.getAttribute("data-categoria-id")
+      loadProductosCategoria(categoriaId)
     })
   })
 }
@@ -60,13 +65,18 @@ function handleNavigation(section) {
   }
 }
 
-// Cargar categorías desde el servidor
+// Cargar categorías desde el servidor (para recargar dinámicamente, por ejemplo, después de agregar una nueva)
 async function loadCategorias() {
   try {
     showLoading(true)
-    // Recargar la página para obtener las categorías actualizadas
-    // En una implementación más avanzada, esto sería una llamada AJAX
-    location.reload()
+    // CORRECCIÓN: Usar el nuevo controlador para obtener todas las categorías
+    const response = await fetch("../../controller/obtener_categoria.php") 
+    const data = await response.json()
+    if (data.success && Array.isArray(data.categorias)) {
+      renderCategorias(data.categorias)
+    } else {
+      showNotification(data.message || "No se pudieron cargar las categorías", "error")
+    }
   } catch (error) {
     console.error("Error al cargar categorías:", error)
     showNotification("Error al cargar las categorías", "error")
@@ -75,19 +85,40 @@ async function loadCategorias() {
   }
 }
 
+// Renderizar categorías en el grid (si se cargan dinámicamente)
+function renderCategorias(categorias) {
+  const categoriasGrid = document.getElementById("categoriasGrid")
+  if (!categoriasGrid) return
+
+  if (categorias.length === 0) {
+    categoriasGrid.innerHTML = `<div class="no-categorias"><p>No hay categorías disponibles</p></div>`
+    return
+  }
+
+  categoriasGrid.innerHTML = categorias
+    .map(
+      (cat) => `
+        <div class="categoria-card" data-categoria-id="${cat.ID}">
+          <div class="categoria-background" style="background-image: url('../../public/img/categorias/${escapeHtml(cat.categoria.toLowerCase())}.jpg');"></div>
+          <div class="categoria-overlay">
+            <h3>${escapeHtml(cat.categoria)}</h3>
+          </div>
+        </div>
+      `
+    )
+    .join("")
+
+  // Reconfigurar event listeners para las tarjetas de categoría recién renderizadas
+  setupCategoriaCardListeners()
+}
+
+
 // Mostrar vista de categorías
 function showCategorias() {
   currentView = "categorias"
   document.getElementById("categoriasGrid").style.display = "grid"
   document.getElementById("productosContainer").style.display = "none"
-
-  // Reconfigurar event listeners para las tarjetas de categoría
-  document.querySelectorAll(".categoria-card").forEach((card) => {
-    card.addEventListener("click", function () {
-      const categoriaId = this.getAttribute("data-categoria-id")
-      loadProductosCategoria(categoriaId)
-    })
-  })
+  // No es necesario reconfigurar listeners aquí si ya se hizo en DOMContentLoaded o renderCategorias
 }
 
 // Cargar productos de una categoría específica
@@ -95,6 +126,7 @@ async function loadProductosCategoria(categoriaId) {
   try {
     showLoading(true)
 
+    // CORRECCIÓN: La URL ya es correcta para obtener productos de una categoría
     const response = await fetch(`../../controller/obtener_productos_categoria.php?categoria_id=${categoriaId}`)
     const data = await response.json()
 
@@ -183,6 +215,7 @@ async function handleCategoriaSubmit(e) {
   try {
     showLoading(true)
 
+    // La URL del controlador de agregar categoría ya es correcta
     const response = await fetch("../../controller/agregar_categoria.php", {
       method: "POST",
       body: formData,
@@ -238,6 +271,10 @@ async function handleProductoSubmit(e) {
       if (currentView === "productos" && currentCategoryId) {
         loadProductosCategoria(currentCategoryId)
       }
+      // Si no estamos en una vista de productos, recargar categorías para que la nueva categoría aparezca
+      else {
+        loadCategorias(); // Recargar todas las categorías para que la nueva aparezca
+      }
     } else {
       showNotification(data.message || "Error al agregar producto", "error")
     }
@@ -263,18 +300,22 @@ function validateProductForm(formData) {
     return false
   }
 
-  if (cantidad < 0) {
-    showNotification("La cantidad no puede ser negativa", "error")
+  if (isNaN(cantidad) || cantidad < 0) { // Añadir isNaN check
+    showNotification("La cantidad debe ser un número positivo", "error")
     return false
   }
 
-  if (precio < 0) {
-    showNotification("El precio no puede ser negativo", "error")
+  if (isNaN(precio) || precio < 0) { // Añadir isNaN check
+    showNotification("El precio debe ser un número positivo", "error")
     return false
   }
 
-  if (!categoria || !proveedor) {
-    showNotification("Debe seleccionar categoría y proveedor", "error")
+  if (!categoria || categoria <= 0) { // Asegurar que no sea 0 o NaN
+    showNotification("Debe seleccionar una categoría válida", "error")
+    return false
+  }
+  if (!proveedor || proveedor <= 0) { // Asegurar que no sea 0 o NaN
+    showNotification("Debe seleccionar un proveedor válido", "error")
     return false
   }
 
@@ -302,11 +343,17 @@ function validateProductForm(formData) {
 function addCategoriaToGrid(categoriaId, categoriaNombre) {
   const categoriasGrid = document.getElementById("categoriasGrid")
 
+  // Remover el mensaje de "no hay categorías" si existe
+  const noCategoriasDiv = categoriasGrid.querySelector(".no-categorias");
+  if (noCategoriasDiv) {
+    noCategoriasDiv.remove();
+  }
+
   const nuevaCategoria = document.createElement("div")
   nuevaCategoria.className = "categoria-card"
   nuevaCategoria.setAttribute("data-categoria-id", categoriaId)
   nuevaCategoria.innerHTML = `
-        <div class="categoria-background" style="background-image: url('../../public/img/default-category.jpg');"></div>
+        <div class="categoria-background" style="background-image: url('../../public/img/categorias/${escapeHtml(categoriaNombre.toLowerCase())}.jpg');"></div>
         <div class="categoria-overlay">
             <h3>${escapeHtml(categoriaNombre)}</h3>
         </div>
