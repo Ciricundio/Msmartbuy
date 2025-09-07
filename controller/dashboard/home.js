@@ -2,22 +2,6 @@ document.addEventListener("DOMContentLoaded", () => {
   // Manejar los botones de favoritos
   const favoriteButtons = document.querySelectorAll(".favorite-button")
 
-/*   favoriteButtons.forEach((button) => {
-    button.addEventListener("click", function () {
-      this.classList.toggle("active")
-
-      // Cambiar el ícono
-      const icon = this.querySelector("i")
-      if (this.classList.contains("active")) {
-        icon.classList.remove("far")
-        icon.classList.add("fas")
-      } else {
-        icon.classList.remove("fas")
-        icon.classList.add("far")
-      }
-    })
-  }) */
-
   // Manejar los botones de navegación
   const navButtons = document.querySelectorAll(".nav-button")
 
