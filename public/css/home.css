@@ -255,7 +255,8 @@ body {
 }
 
 .hero-banner {
-  background: var(--verde);
+  background: white;
+  border: var(--verde) 2px solid;
   border-radius: 16px;
   padding: 32px;
   position: relative;
@@ -268,18 +269,19 @@ body {
 .hero-content {
   position: relative;
   z-index: 10;
+  color: var(--verde);
 }
 
 .hero-title {
   font-size: 24px;
   font-weight: bold;
-  color: white;
+  color: var(--verde);
   margin-bottom: 8px;
 }
 
 .hero-subtitle {
   font-size: 18px;
-  color: white;
+  color: var(--verde);
 }
 
 .hero-image {
@@ -305,7 +307,7 @@ body {
 }
 
 .section {
-  margin-bottom: 32px;
+  margin: 32px 0;
 }
 
 .section-title {
@@ -335,13 +337,19 @@ body {
 }
 
 .category-card {
+  width: 150px;
+  height: 50px;
   background-color: white;
-  border-radius: 8px;
+  border-radius:20px;
   padding: 16px;
   text-align: center;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
   transition: box-shadow 0.3s;
   cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 20px;
 }
 
 .category-card:hover {
@@ -349,9 +357,9 @@ body {
 }
 
 .category-card i {
-  font-size: 32px;
+  font-size: 25px;
   color: #2ecb70;
-  margin-bottom: 8px;
+  margin: 8px;
   display: block;
 }
 
