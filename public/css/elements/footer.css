@@ -9,7 +9,7 @@ footer{
 }
 
 img{
-    width: 15%;
+    width: 9%;
 }
 
 .msb-text{
@@ -38,7 +38,7 @@ footer p{
     grid-template-columns: repeat(4, 1fr);
     grid-template-rows: repeat(3, 1fr);
     gap: 8px;
-    padding: 6%;
+    padding: 20px 70px 5px 70px;
 }
     
 .div1 {
