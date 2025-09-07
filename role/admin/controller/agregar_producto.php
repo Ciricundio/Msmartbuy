@@ -32,12 +32,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $foto_nombre = null;
     if (isset($_FILES['foto']) && $_FILES['foto']['error'] === UPLOAD_ERR_OK) {
         $foto = $_FILES['foto'];
-        $allowed_types = ['image/jpeg', 'image/png', 'image/gif'];
+        $allowed_types = ['image/jpeg', 'image/png'];
         $max_size = 5 * 1024 * 1024; // 5MB
         
         // Validar tipo de archivo
         if (!in_array($foto['type'], $allowed_types)) {
-            echo json_encode(['success' => false, 'message' => 'Tipo de archivo no permitido. Use JPG, PNG o GIF']);
+            echo json_encode(['success' => false, 'message' => 'Tipo de archivo no permitido. Use JPG, PNG']);
             exit();
         }
         
@@ -49,8 +49,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         // Generar nombre único para la imagen
         $extension = pathinfo($foto['name'], PATHINFO_EXTENSION);
-        $foto_nombre = 'producto_' . time() . '_' . uniqid() . '.' . $extension;
-        $ruta_destino = '../public/img/' . $foto_nombre;
+        $foto_nombre = $sku . uniqid() . '.' . $extension;
+        $ruta_destino = '../../../public/img/products/' . $foto_nombre;
         
         // Mover archivo
         if (!move_uploaded_file($foto['tmp_name'], $ruta_destino)) {
@@ -62,7 +62,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Insertar producto en la base de datos
     $insert_query = "INSERT INTO producto (nombre, marca, cantidad, descripcion, sku, precio_unitario, peso, estado, foto, categoria_ID, proveedor_ID) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
     $insert_stmt = mysqli_prepare($conn, $insert_query);
-    mysqli_stmt_bind_param($insert_stmt, "ssisdsssiii", $nombre, $marca, $cantidad, $descripcion, $sku, $precio_unitario, $peso, $estado, $foto_nombre, $categoria_ID, $proveedor_ID);
+    mysqli_stmt_bind_param($insert_stmt, "ssissiissii", $nombre, $marca, $cantidad, $descripcion, $sku, $precio_unitario, $peso, $estado, $foto_nombre, $categoria_ID, $proveedor_ID);
     
     if (mysqli_stmt_execute($insert_stmt)) {
         $producto_id = mysqli_insert_id($conn);
@@ -77,7 +77,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     mysqli_stmt_close($insert_stmt);
 } else {
-    header("Location: ../view/home/ad_home.php");;
+    header("Location: ad_home.php?opcion=3");
+    ?>
+    <script>
+    function mostrarNotificacion(mensaje) {
+        // Crear div
+        const noti = document.createElement('div');
+        noti.className = 'notificacion';
+        noti.textContent = mensaje;
+
+        // Agregar al body
+        document.body.appendChild(noti);
+
+        // Quitar después de 3 segundos
+        setTimeout(() => {
+        noti.style.opacity = '0';
+        setTimeout(() => noti.remove(), 500); // Espera la animación
+        }, 3000);
+    }
+
+    mostrarNotificacion("")
+    </script>
+    <?php
+    exit();
 }
 
 mysqli_close($conn);
