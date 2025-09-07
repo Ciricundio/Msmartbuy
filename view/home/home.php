@@ -91,13 +91,14 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             border-radius: 4px;
         }
 
-        .product-image-section{
+        .product-image-section {
             height: 80%;
             width: 100%;
             background: white;
             position: relative;
             overflow: hidden;
-            display: flex;              /* activa flexbox */
+            display: flex;
+            /* activa flexbox */
             justify-content: center;
         }
 
@@ -210,14 +211,14 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             flex: 0 0 250px;
             background: white;
             border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
             transition: transform 0.3s ease, box-shadow 0.3s ease;
             overflow: hidden;
         }
 
         .product-card-horizontal:hover {
             transform: translateY(-5px);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.15);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
         }
 
         .product-card-horizontal .product-image {
@@ -236,7 +237,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             position: absolute;
             top: 10px;
             right: 10px;
-            background: rgba(255,255,255,0.9);
+            background: rgba(255, 255, 255, 0.9);
             border: none;
             border-radius: 50%;
             width: 35px;
@@ -332,7 +333,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
 </head>
 
 <body>
-    <div class="container">
+    <div class="container orden">
 
         <!-- Sidebar -->
         <aside class="sidebar">
@@ -383,28 +384,28 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             </div>
         </aside>
 
-        <!-- Header -->
-        <div class="header">
-            <div class="header-content">
-
-                <div class="header-x bordear">
-                    <button class="icon-button">
-                        <span class="material-symbols-rounded">close</span>
-                    </button>
-                </div>
-
-                <div class="search-container bordear">
-                    <div class="search-box">
-                        <i class="fas fa-search"></i>
-                        <input class="bordear" type="text" placeholder="Busca tu producto aquí..." id="product-search">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-
         <!-- Main Content -->
         <main class="main-content">
+
+            <!-- Header -->
+            <div class="header">
+                <div class="header-content">
+
+                    <div class="header-x bordear">
+                        <button class="icon-button">
+                            <span class="material-symbols-rounded">close</span>
+                        </button>
+                    </div>
+
+                    <div class="search-container bordear">
+                        <div class="search-box">
+                            <i class="fas fa-search"></i>
+                            <input class="bordear" type="text" placeholder="Busca tu producto aquí..." id="product-search">
+                        </div>
+                    </div>
+
+                </div>
+            </div>
 
             <!-- Hero Banner -->
             <div class="hero-banner">
@@ -621,14 +622,10 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
 
         </main>
 
-
-        <?php require '../template/footer.php' ?>
     </div>
+        <?php require '../template/footer.php' ?>
 
 
-
-
-            <!-- React Aside Components Container -->
     <div id="aside-components-root"></div>
 
     <!-- Load React Components -->
@@ -876,16 +873,16 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
         async function toggleFavoriteProduct(productId, buttonElement) {
             const icon = buttonElement.querySelector('i');
             const isInFavorites = icon.classList.contains('fas');
-            
+
             // Disable button during request
             buttonElement.disabled = true;
-            
+
             try {
                 let response;
                 if (isInFavorites) {
                     // Remove from favorites
                     response = await makeAjaxRequest('../../quitarFavorito.php', `product_id=${productId}`);
-                    
+
                     if (response.success) {
                         icon.classList.remove('fas');
                         icon.classList.add('far');
@@ -896,7 +893,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 } else {
                     // Add to favorites
                     response = await makeAjaxRequest('../../agregarFavorito.php', `product_id=${productId}`);
-                    
+
                     if (response.success) {
                         icon.classList.remove('far');
                         icon.classList.add('fas');

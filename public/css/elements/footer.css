@@ -3,6 +3,9 @@
 footer{
     background-color: #fefefe;
     color: var(--text-footer);
+    width: 75%;
+    position: absolute;
+    left: 256px;
 }
 
 img{
