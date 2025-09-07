@@ -91,6 +91,16 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             border-radius: 4px;
         }
 
+        .product-image-section{
+            height: 80%;
+            width: 100%;
+            background: white;
+            position: relative;
+            overflow: hidden;
+            display: flex;              /* activa flexbox */
+            justify-content: center;
+        }
+
         /* Modal styles */
         .product-modal-overlay {
             position: fixed;
@@ -218,7 +228,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
         }
 
         .product-card-horizontal .product-image img {
-            width: 80%;
+            height: 100%;
             object-fit: cover;
         }
 
@@ -343,7 +353,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     <i class="fas fa-shopping-cart"></i>
                     Mi carrito
                 </button>
-                <button class="nav-button">
+                <button class="nav-button" onclick="window.location.href='../compras/favorito.php'">
                     <i class="fas fa-heart"></i>
                     Mis favoritos
                 </button>
@@ -486,7 +496,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 <div class="products-scroll-container">
                     <div class="products-horizontal-list">
                         <?php foreach ($productosNuevos as $p): ?>
-                            <div class="product-card" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
+                            <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
                                 <div class="product-image">
                                     <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
@@ -536,7 +546,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 <div class="products-scroll-container">
                     <div class="products-horizontal-list">
                         <?php foreach ($productosPopulares as $p): ?>
-                            <div class="product-card" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
+                            <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
                                 <div class="product-image">
                                     <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
@@ -580,7 +590,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 <div class="products-scroll-container">
                     <div class="products-horizontal-list">
                         <?php foreach ($todosProdutos as $p): ?>
-                            <div class="product-card" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer; width: 150px;">
+                            <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer; width: 150px;">
                                 <div class="product-image">
                                     <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
@@ -613,41 +623,6 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
 
 
         <?php require '../template/footer.php' ?>
-
-            <!-- Product Modal -->
- <!--  <div id="product-modal" class="product-modal-overlay">
-        <div class="product-modal-content">
-            <button class="modal-close">&times;</button>
-            <div class="modal-body">
-                <div class="product-detail-layout">
-                    <div class="product-image-section">
-                        <img id="modal-product-image" src="../../public/img/products/<?= $productosNuevos['foto'] ?>" alt="" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 8px;">
-                    </div>
-                    <div class="product-info-section">
-                        <h1 id="modal-product-name" style="margin: 0 0 10px 0; color: #333;"> <?= $productosNuevos['nombre'] ?></h1>
-                        <p id="modal-product-brand" style="color: #666; margin: 0 0 15px 0;"> <?= strtoupper($productosNuevos['marca']) ?></p>
-                        <p id="modal-product-description" style="color: #555; line-height: 1.6; margin-bottom: 20px;"> <?= $productosNuevos['descripcion'] ?></p>
-
-                        <div class="price-display" style="margin-bottom: 20px;">
-                            <span id="modal-product-price" style="font-size: 24px; font-weight: bold; color: #ff6b35;"></span>
-                            <span id="modal-product-original-price" style="font-size: 18px; color: #999; text-decoration: line-through; margin-left: 10px;"></span>
-                        </div>
-
-                        <div class="product-details" style="margin-bottom: 25px;">
-                            <p><strong>SlU:</strong> <span id="modal-product-sku"> <?= $productosNuevos['sku'] ?></span></p>
-                            <p><strong>Estado:</strong> <span id="modal-product-stock"> <?= $productosNuevos['estado'] ?></span></p>
-                            <p><strong>Peso:</strong> <span id="modal-product-weight"> <?= $productosNuevos['peso'] ?> gr</span></p>
-                        </div>
-
-                        <div class="action-buttons" style="display: flex; gap: 15px; flex-direction: column;">
-                            <button id="add-to-cart-btn" class="btn btn-primary">Agregar al Carrito</button>
-                            <button id="buy-now-btn" class="btn btn-success">Comprar Ahora</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
     </div>
 
 
