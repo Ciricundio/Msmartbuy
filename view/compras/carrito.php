@@ -60,7 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         exit();
     } elseif (isset($_POST['finalizar_compra'])) {
         // Procesar compra
-        require_once '../controller/pago/crearPreferenciaPago.php';
+        require_once '../../controller/pago/crearPreferenciaPago.php';
         exit();
     }
 }
@@ -212,12 +212,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                                 <button class="btn btn-outline-secondary increment" type="button">+</button>
                                             </div>
                                             <div class="text-end">
-                                                <span class="fw-bold">$<?= number_format($producto['precio_final'], 0, ',', '.') ?></span>
-                                                <?php if($producto['descuento'] > 0): ?>
-                                                    <div class="text-decoration-line-through text-muted small">
-                                                        $<?= number_format($producto['precio_unitario'], 0, ',', '.') ?>
-                                                    </div>
-                                                <?php endif; ?>
+                                                <span class="fw-bold">$<?= number_format($producto['cantidad'] * $producto['precio_final'], 0, ',', '.') ?></span>
+
                                             </div>
                                         </div>
                                     </div>
