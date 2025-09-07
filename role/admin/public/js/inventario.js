@@ -13,14 +13,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
 // Configurar todos los event listeners
 function initializeEventListeners() {
-  // Botones principales
-  document.getElementById("btnNuevaCategoria").addEventListener("click", () => openModal("modalCategoria"))
-  document.getElementById("btnNuevoProducto").addEventListener("click", () => openModal("modalProducto"))
-  document.getElementById("btnVolverCategorias").addEventListener("click", showCategorias)
+  // Botones principales - Verificar que existen antes de agregar listeners
+  const btnNuevaCategoria = document.getElementById("btnNuevaCategoria")
+  if (btnNuevaCategoria) {
+    btnNuevaCategoria.addEventListener("click", () => openModal("modalCategoria"))
+  }
+  
+  const btnNuevoProducto = document.getElementById("btnNuevoProducto")
+  if (btnNuevoProducto) {
+    btnNuevoProducto.addEventListener("click", () => openModal("modalProducto"))
+  }
+  
+  const btnVolverCategorias = document.getElementById("btnVolverCategorias")
+  if (btnVolverCategorias) {
+    btnVolverCategorias.addEventListener("click", showCategorias)
+  }
 
-  // Formularios
-  document.getElementById("formCategoria").addEventListener("submit", handleCategoriaSubmit)
-  document.getElementById("formProducto").addEventListener("submit", handleProductoSubmit)
+  // Formularios - Verificar que existen
+  const formCategoria = document.getElementById("formCategoria")
+  if (formCategoria) {
+    formCategoria.addEventListener("submit", handleCategoriaSubmit)
+  }
+  
+  const formProducto = document.getElementById("formProducto")
+  if (formProducto) {
+    formProducto.addEventListener("submit", handleProductoSubmit)
+  }
 
   // Cerrar modales
   document.querySelectorAll(".modal-close, .modal-overlay").forEach((element) => {
@@ -57,7 +75,10 @@ function setupCategoriaCardListeners() {
 function handleNavigation(section) {
   // Actualizar estado activo
   document.querySelectorAll(".nav-link").forEach((link) => link.classList.remove("active"))
-  document.querySelector(`[data-section="${section}"]`).classList.add("active")
+  const navLink = document.querySelector(`[data-section="${section}"]`)
+  if (navLink) {
+    navLink.classList.add("active")
+  }
 
   // Por ahora solo manejamos inventario
   if (section === "inventario") {
@@ -116,9 +137,15 @@ function renderCategorias(categorias) {
 // Mostrar vista de categorías
 function showCategorias() {
   currentView = "categorias"
-  document.getElementById("categoriasGrid").style.display = "grid"
-  document.getElementById("productosContainer").style.display = "none"
-  // No es necesario reconfigurar listeners aquí si ya se hizo en DOMContentLoaded o renderCategorias
+  const categoriasGrid = document.getElementById("categoriasGrid")
+  const productosContainer = document.getElementById("productosContainer")
+  
+  if (categoriasGrid) {
+    categoriasGrid.style.display = "grid"
+  }
+  if (productosContainer) {
+    productosContainer.style.display = "none"
+  }
 }
 
 // Cargar productos de una categoría específica
@@ -135,14 +162,24 @@ async function loadProductosCategoria(categoriaId) {
       currentView = "productos"
 
       // Actualizar título
-      document.getElementById("tituloCategoria").textContent = data.categoria
+      const tituloCategoria = document.getElementById("tituloCategoria")
+      if (tituloCategoria) {
+        tituloCategoria.textContent = data.categoria
+      }
 
       // Renderizar productos
       renderProductos(data.productos)
 
       // Mostrar vista de productos
-      document.getElementById("categoriasGrid").style.display = "none"
-      document.getElementById("productosContainer").style.display = "block"
+      const categoriasGrid = document.getElementById("categoriasGrid")
+      const productosContainer = document.getElementById("productosContainer")
+      
+      if (categoriasGrid) {
+        categoriasGrid.style.display = "none"
+      }
+      if (productosContainer) {
+        productosContainer.style.display = "block"
+      }
     } else {
       showNotification(data.message || "Error al cargar productos", "error")
     }
@@ -157,6 +194,7 @@ async function loadProductosCategoria(categoriaId) {
 // Renderizar productos en el grid
 function renderProductos(productos) {
   const productosGrid = document.getElementById("productosGrid")
+  if (!productosGrid) return
 
   if (productos.length === 0) {
     productosGrid.innerHTML = `
@@ -342,6 +380,7 @@ function validateProductForm(formData) {
 // Agregar nueva categoría al grid
 function addCategoriaToGrid(categoriaId, categoriaNombre) {
   const categoriasGrid = document.getElementById("categoriasGrid")
+  if (!categoriasGrid) return
 
   // Remover el mensaje de "no hay categorías" si existe
   const noCategoriasDiv = categoriasGrid.querySelector(".no-categorias");
@@ -500,10 +539,10 @@ function formatDate(dateString) {
 }
 
 // Manejo de errores globales
-window.addEventListener("error", (e) => {
+/* window.addEventListener("error", (e) => {
   console.error("Error global:", e.error)
   showNotification("Ha ocurrido un error inesperado", "error")
-})
+}) */
 
 // Manejo de promesas rechazadas
 window.addEventListener("unhandledrejection", (e) => {
