@@ -4,7 +4,7 @@ include_once '../../../config/conexion.php';
 header('Content-Type: application/json');
 
 // Verificar autenticación y rol
-if (!isset($_SESSION['ID']) || $_SESSION['rol'] == 'admin') {
+if (!isset($_SESSION['ID']) || $_SESSION['rol'] !== 'admin') {
     echo json_encode(['success' => false, 'message' => 'No autorizado']);
     exit();
 }
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     mysqli_stmt_close($cat_stmt);
     
     // Verificar que el proveedor existe
-    $prov_check_query = "SELECT ID FROM proveedor WHERE ID = ?";
+    $prov_check_query = "SELECT ID FROM usuario WHERE ID = ? AND rol = 'proveedor'";
     $prov_stmt = mysqli_prepare($conn, $prov_check_query);
     mysqli_stmt_bind_param($prov_stmt, "i", $proveedor_ID);
     mysqli_stmt_execute($prov_stmt);
