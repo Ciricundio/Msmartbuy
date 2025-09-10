@@ -237,7 +237,7 @@ class ProductModal {
                                     background: #ff6b35;
                                     color: white;
                                     border: none;
-                                    border-radius: 6px;
+                                    border-radius: 20px;
                                     cursor: pointer;
                                     font-size: 16px;
                                 ">Agregar al Carrito</button>
@@ -248,7 +248,7 @@ class ProductModal {
                                     background: #28a745;
                                     color: white;
                                     border: none;
-                                    border-radius: 6px;
+                                    border-radius: 20px;
                                     cursor: pointer;
                                     font-size: 16px;
                                 ">Comprar Ahora</button>
@@ -340,7 +340,7 @@ class ProductModal {
 
     buyNow() {
         // Redirect to checkout flow
-        window.location.href = `checkout.php?product_id=${this.currentProduct.ID}&quantity=1`;
+        window.location.href = `../../controller/pago/crearPreferenciaPago.php?product_id=${this.currentProduct.ID}&quantity=1`;
     }
 }
 
