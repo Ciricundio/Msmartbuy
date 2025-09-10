@@ -182,7 +182,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             <i class="fas fa-shopping-cart fa-4x mb-3 text-muted"></i>
                             <h3 class="mb-3">Tu carrito está vacío</h3>
                             <p class="text-muted mb-4">Agrega productos para comenzar a comprar</p>
-                            <a href="../home.php" class="btn btn-primary btn-lg">
+                            <a href="../home/home.php" class="btn btn-primary btn-lg">
                                 <i class="fas fa-arrow-left me-2"></i> Ver productos
                             </a>
                         </div>
