@@ -52,7 +52,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $productoId = $_POST['producto_id'];
         $sql = "DELETE FROM carrito_producto 
                 WHERE producto_ID = ? 
-                AND carrito_ID IN (SELECT ID FROM carrito WHERE usuario_ID = ? AND estado = 'Disponible')";
+                AND carrito_ID IN (SELECT ID FROM carrito WHERE usuario_ID = ?)";
         $stmt = $conn->prepare($sql);
         $stmt->bind_param("ii", $productoId, $idUsuario);
         $stmt->execute();
