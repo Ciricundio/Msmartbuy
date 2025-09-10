@@ -362,10 +362,6 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     <i class="fas fa-shopping-bag"></i>
                     Mis compras
                 </button>
-                <button class="nav-button">
-                    <i class="fas fa-th"></i>
-                    Categorías
-                </button>
 
             </nav>
 
