@@ -485,7 +485,7 @@ if ($userId <= 0) {
                                         Agregar al Carrito
                                     </span>
                                 </button>
-                                <a href="../producto/detalle.php?id=<?php echo $product['ID']; ?>" class="btn btn-secondary">
+                                <a href="../../detalleProducto.php?id=<?php echo $product['ID']; ?>" class="btn btn-secondary">
                                     <i class="fas fa-eye"></i>
                                     Ver
                                 </a>
