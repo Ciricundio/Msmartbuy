@@ -229,11 +229,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                 </div>
                             <?php endforeach; ?>
                             
-                            <div class="d-flex justify-content-between mt-4">
+<!--                             <div class="d-flex justify-content-between mt-4">
                                 <button type="submit" name="actualizar_carrito" class="btn btn-outline-primary">
                                     <i class="fas fa-sync-alt me-2"></i>Actualizar carrito
                                 </button>
-                            </div>
+                            </div> -->
                         </form>
                     <?php endif; ?>
                 </div>
