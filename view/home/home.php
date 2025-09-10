@@ -443,7 +443,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             <section class="container mt-4 descuento">
                 <div class="section-header">
                     <h2 class="section-title">Descuentos</h2>
-                    <a href="#" class="section-link">mostrar todos</a>
+                    <!-- <a href="#" class="section-link">mostrar todos</a> -->
                 </div>
 
                 <div class="products-scroll-container">
@@ -484,10 +484,11 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             $stmtNuevos = $conn->query($sqlNuevos);
             $productosNuevos = $stmtNuevos->fetch_all(MYSQLI_ASSOC);
             ?>
+
             <section class="container mt-5">
                 <div class="section-header">
                     <h2 class="section-title">Productos Nuevos</h2>
-                    <a href="#" class="section-link">mostrar todos</a>
+                    <!-- <a href="#" class="section-link">mostrar todos</a> -->
                 </div>
 
                 <div class="products-scroll-container">
@@ -534,10 +535,11 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             $stmtPopulares = $conn->query($sqlPopulares);
             $productosPopulares = $stmtPopulares->fetch_all(MYSQLI_ASSOC);
             ?>
+
             <section class="container mt-5">
                 <div class="section-header">
                     <h2 class="section-title">Más Populares</h2>
-                    <a href="#" class="section-link">mostrar todos</a>
+                    <!-- <a href="#" class="section-link">mostrar todos</a> -->
                 </div>
 
                 <div class="products-scroll-container">
@@ -578,10 +580,11 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             $stmtTodos = $conn->query($sqlTodos);
             $todosProdutos = $stmtTodos->fetch_all(MYSQLI_ASSOC);
             ?>
+
             <section class="container mt-5 mb-5">
                 <div class="section-header">
                     <h2 class="section-title">Todos los Productos</h2>
-                    <a href="#" class="section-link">mostrar todos</a>
+                    <!-- <a href="#" class="section-link">mostrar todos</a> -->
                 </div>
 
                 <div class="products-scroll-container">
