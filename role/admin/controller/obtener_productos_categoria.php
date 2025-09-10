@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once '../../../../config/conexion.php';
+include_once '../../../config/conexion.php';
 header('Content-Type: application/json');
 
 // Verificar autenticación y rol
