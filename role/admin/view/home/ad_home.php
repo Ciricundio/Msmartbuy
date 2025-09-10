@@ -100,5 +100,113 @@ $admin = mysqli_query($conn, $queryAdmin);
     </main>
 
     <script src="../../public/js/inventariooo.js"></script>
+
+    <script>
+    function activarModoEdicion() {
+        document.querySelector('.producto-detalle').style.display = 'none';
+        document.getElementById('formulario-edicion').style.display = 'block';
+    }
+
+    function cancelarEdicion() {
+        document.querySelector('.producto-detalle').style.display = 'block';
+        document.getElementById('formulario-edicion').style.display = 'none';
+    }
+
+    function guardarCambios(event) {
+        event.preventDefault();
+        
+        const form = event.target;
+        const formData = new FormData(form);
+        
+        fetch('../../controller/editar_producto.php', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                mostrarNotificacion('Producto actualizado correctamente', 'success');
+                cerrarModalDetalle();
+                // Recargar la lista de productos
+                location.reload();
+            } else {
+                mostrarNotificacion(data.message || 'Error al actualizar el producto', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            mostrarNotificacion('Error de conexión', 'error');
+        });
+    }
+
+    /*function confirmarEliminacion(productoId) {
+        if (confirm('¿Estás seguro de que deseas eliminar este producto? Esta acción no se puede deshacer.')) {
+            eliminarProducto(productoId);
+        }
+    }
+
+    function eliminarProducto(productoId) {
+        fetch('../../controller/eliminar_producto.php', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                producto_id: productoId
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                mostrarNotificacion('Producto eliminado correctamente', 'success');
+                cerrarModalDetalle();
+                // Recargar la lista de productos
+                location.reload();
+            } else {
+                mostrarNotificacion(data.message || 'Error al eliminar el producto', 'error');
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            mostrarNotificacion('Error de conexión', 'error');
+        });
+    } */
+
+    function mostrarNotificacion(mensaje, tipo = 'info') {
+        const noti = document.createElement('div');
+        noti.className = `notificacion ${tipo}`;
+        noti.textContent = mensaje;
+        
+        // Estilos básicos para la notificación
+        noti.style.position = 'fixed';
+        noti.style.top = '20px';
+        noti.style.right = '20px';
+        noti.style.padding = '15px 20px';
+        noti.style.borderRadius = '5px';
+        noti.style.color = 'white';
+        noti.style.zIndex = '10000';
+        noti.style.opacity = '0';
+        noti.style.transition = 'opacity 0.3s ease';
+        
+        if (tipo === 'success') {
+            noti.style.backgroundColor = '#28a745';
+        } else if (tipo === 'error') {
+            noti.style.backgroundColor = '#dc3545';
+        } else {
+            noti.style.backgroundColor = '#17a2b8';
+        }
+        
+        document.body.appendChild(noti);
+        
+        // Mostrar con animación
+        setTimeout(() => noti.style.opacity = '1', 100);
+        
+        // Ocultar después de 3 segundos
+        setTimeout(() => {
+            noti.style.opacity = '0';
+            setTimeout(() => noti.remove(), 300);
+        }, 3000);
+    }
+</script>
   </body>
 </html>
