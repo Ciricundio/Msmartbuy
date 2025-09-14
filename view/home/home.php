@@ -28,7 +28,7 @@ $apellidoUsuario = $usuario['apellido'];
 
 
 // Consulta de productos en promoción
-$sql = "SELECT * FROM producto WHERE descuento > 0 ORDER BY descuento DESC LIMIT 8";
+$sql = "SELECT * FROM producto WHERE descuento > 0 AND estado = 'Disponible' ORDER BY descuento DESC LIMIT 8";
 $stmt = $conn->query($sql);
 $productos = $stmt->fetch_all(MYSQLI_ASSOC);
 ?>
@@ -496,7 +496,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                         <?php foreach ($productosNuevos as $p): ?>
                             <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
                                 <div class="product-image">
-                                    <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
+                                    <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['foto'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
                                         <i class="far fa-heart"></i>
                                     </button>
@@ -531,7 +531,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                            WHERE p.estado = 'Disponible' 
                            GROUP BY p.ID 
                            ORDER BY veces_comprado DESC, p.ID ASC 
-                           LIMIT 12";
+                           LIMIT 8";
             $stmtPopulares = $conn->query($sqlPopulares);
             $productosPopulares = $stmtPopulares->fetch_all(MYSQLI_ASSOC);
             ?>
@@ -547,7 +547,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                         <?php foreach ($productosPopulares as $p): ?>
                             <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer;">
                                 <div class="product-image">
-                                    <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
+                                    <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['foto'] ?>">
                                     <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
                                         <i class="far fa-heart"></i>
                                     </button>
@@ -574,50 +574,6 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 </div>
             </section>
 
-            <!-- Sección de Todos los Productos -->
-            <?php
-            $sqlTodos = "SELECT * FROM producto WHERE estado = 'Disponible' ORDER BY nombre ASC LIMIT 15";
-            $stmtTodos = $conn->query($sqlTodos);
-            $todosProdutos = $stmtTodos->fetch_all(MYSQLI_ASSOC);
-            ?>
-
-            <section class="container mt-5 mb-5">
-                <div class="section-header">
-                    <h2 class="section-title">Todos los Productos</h2>
-                    <!-- <a href="#" class="section-link">mostrar todos</a> -->
-                </div>
-
-                <div class="products-scroll-container">
-                    <div class="products-horizontal-list">
-                        <?php foreach ($todosProdutos as $p): ?>
-                            <div class="product-card-horizontal" onclick="openProductDetail(<?= $p['ID'] ?>)" style="cursor:pointer; width: 150px;">
-                                <div class="product-image">
-                                    <img src="../../public/img/products/<?= $p['foto'] ?>" alt="<?= $p['nombre'] ?>">
-                                    <button class="favorite-button" onclick="event.stopPropagation(); toggleFavoriteProduct(<?= $p['ID'] ?>, this)">
-                                        <i class="far fa-heart"></i>
-                                    </button>
-                                </div>
-                                <div class="card-body">
-                                    <div class="product-brand"><?= strtoupper($p['marca']) ?></div>
-                                    <h6 class="product-name"><?= $p['nombre'] ?></h6>
-                                    <div class="product-price">
-                                        <?php if ($p['descuento'] > 0): ?>
-                                            <span class="fw-bold">$ <?= number_format($p['precio_unitario'] * (1 - $p['descuento'] / 100), 0, ',', '.') ?></span>
-                                            <span class="porcentaje">-<?= $p['descuento'] ?>%</span>
-                                            <br><small class="text-muted text-decoration-line-through">$<?= number_format($p['precio_unitario'], 0, ',', '.') ?></small>
-                                        <?php else: ?>
-                                            <span class="fw-bold">$ <?= number_format($p['precio_unitario'], 0, ',', '.') ?></span>
-                                        <?php endif; ?>
-                                    </div>
-                                    <button class="add-button" id="btn-product-<?= $p['ID'] ?>" onclick="event.stopPropagation(); toggleCartProduct(<?= $p['ID'] ?>, this)">
-                                        <span class="btn-text">Agregar 🛒</span>
-                                    </button>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    </div>
-                </div>
-            </section>
 
         </main>
 
