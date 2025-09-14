@@ -41,7 +41,7 @@ CREATE TABLE `favorito_producto` (
 
 LOCK TABLES `favorito_producto` WRITE;
 /*!40000 ALTER TABLE `favorito_producto` DISABLE KEYS */;
-INSERT INTO `favorito_producto` VALUES (2,20),(1,113);
+INSERT INTO `favorito_producto` VALUES (1,113),(1,131);
 /*!40000 ALTER TABLE `favorito_producto` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-10  0:24:21
+-- Dump completed on 2025-09-14 13:42:11
