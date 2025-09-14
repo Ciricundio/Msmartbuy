@@ -242,7 +242,7 @@ class ProductModal {
                                     font-size: 16px;
                                 ">Agregar al Carrito</button>
                                 
-                                <button id="buy-now-btn" class="btn btn-success" style="
+                                 <!--<button id="buy-now-btn" class="btn btn-success" style="
                                     flex: 1;
                                     padding: 12px 24px;
                                     background: #28a745;
@@ -251,7 +251,7 @@ class ProductModal {
                                     border-radius: 20px;
                                     cursor: pointer;
                                     font-size: 16px;
-                                ">Comprar Ahora</button>
+                                ">Comprar Ahora</button>-->
                             </div>
                         </div>
                     </div>
@@ -268,7 +268,7 @@ class ProductModal {
         });
 
         this.modal.querySelector('#add-to-cart-btn').addEventListener('click', () => this.addToCart());
-        this.modal.querySelector('#buy-now-btn').addEventListener('click', () => this.buyNow());
+        /* this.modal.querySelector('#buy-now-btn').addEventListener('click', () => this.buyNow()); */
     }
 
     open(product) {
