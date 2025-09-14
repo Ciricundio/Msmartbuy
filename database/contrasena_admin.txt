@@ -1,0 +1,6 @@
+Para acceder con el rol de administrador usa la siguientes credenciales.
+correo: admin@msb.com
+contraseña: @admin2025
+
+por seguridad no se puede crear un usuario con el rol administrador en
+la aplicación web.
