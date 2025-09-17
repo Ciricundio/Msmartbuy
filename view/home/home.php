@@ -747,7 +747,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 let response;
                 if (isInCart) {
                     // Remove from cart
-                    response = await makeAjaxRequest('../../quitarDelCarrito.php', `product_id=${productId}`);
+                    response = await makeAjaxRequest('../../controller/carrito/quitarDelCarrito.php', `product_id=${productId}`);
 
                     if (response.success) {
                         btnText.textContent = 'Agregar 🛒';
@@ -758,7 +758,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     }
                 } else {
                     // Add to cart
-                    response = await makeAjaxRequest('../../agregarAlCarrito.php', `product_id=${productId}&quantity=1`);
+                    response = await makeAjaxRequest('../../controller/carrito/agregarAlCarrito.php', `product_id=${productId}&quantity=1`);
 
                     if (response.success) {
                         btnText.textContent = 'Agregado ✓';
@@ -790,7 +790,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
         async function checkCartStatus() {
             try {
                 const xhr = new XMLHttpRequest();
-                xhr.open('GET', '../../listarCarrito.php', true);
+                xhr.open('GET', '../../controller/carrito/listarCarrito.php', true);
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
                 xhr.onreadystatechange = function() {
@@ -870,7 +870,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
         async function checkFavoritesStatus() {
             try {
                 const xhr = new XMLHttpRequest();
-                xhr.open('GET', '../../listarFavoritos.php', true);
+                xhr.open('GET', '../../controller/favorito/listarFavoritos.php', true);
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
                 xhr.onreadystatechange = function() {
