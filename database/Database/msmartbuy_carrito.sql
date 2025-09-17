@@ -32,7 +32,7 @@ CREATE TABLE `carrito` (
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `fk_carrito_usuario1_idx` (`usuario_ID`),
   CONSTRAINT `fk_carrito_usuario1` FOREIGN KEY (`usuario_ID`) REFERENCES `usuario` (`ID`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,7 +41,7 @@ CREATE TABLE `carrito` (
 
 LOCK TABLES `carrito` WRITE;
 /*!40000 ALTER TABLE `carrito` DISABLE KEYS */;
-INSERT INTO `carrito` VALUES (1,'2025-07-26',4),(2,'2025-08-19',13),(3,'2025-09-14',5),(4,'2025-09-14',12);
+INSERT INTO `carrito` VALUES (2,'2025-08-19',13),(3,'2025-09-14',5);
 /*!40000 ALTER TABLE `carrito` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -54,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-14 13:42:13
+-- Dump completed on 2025-09-16 20:34:37

@@ -27,12 +27,12 @@ DROP TABLE IF EXISTS `metodo_pago`;
 CREATE TABLE `metodo_pago` (
   `ID` int NOT NULL AUTO_INCREMENT,
   `pago` varchar(45) DEFAULT NULL,
-  `tarjeta_ID` int NOT NULL,
+  `tarjeta_ID` int DEFAULT NULL,
   PRIMARY KEY (`ID`),
   UNIQUE KEY `ID_UNIQUE` (`ID`),
   KEY `fk_table1_tarjeta1_idx` (`tarjeta_ID`),
   CONSTRAINT `fk_table1_tarjeta1` FOREIGN KEY (`tarjeta_ID`) REFERENCES `tarjeta` (`ID`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb3;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -41,6 +41,7 @@ CREATE TABLE `metodo_pago` (
 
 LOCK TABLES `metodo_pago` WRITE;
 /*!40000 ALTER TABLE `metodo_pago` DISABLE KEYS */;
+INSERT INTO `metodo_pago` VALUES (1,'Efectivo',NULL),(2,'Transferencia',NULL);
 /*!40000 ALTER TABLE `metodo_pago` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -53,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2025-09-14 13:42:13
+-- Dump completed on 2025-09-16 20:34:39
