@@ -39,148 +39,7 @@ $apellidoUsuario = $usuario['apellido'];
     <link href="https://fonts.googleapis.com/css2?family=Nunito&display=swap" rel="stylesheet">
     <!--Bootstrap-->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    
-    <style>
-        .purchases-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        .purchase-card {
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            margin-bottom: 20px;
-            overflow: hidden;
-        }
-        
-        .purchase-header {
-            background: #f8f9fa;
-            padding: 20px;
-            border-bottom: 1px solid #eee;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .purchase-info {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        
-        .purchase-date {
-            font-weight: bold;
-            color: #333;
-        }
-        
-        .purchase-total {
-            font-size: 18px;
-            font-weight: bold;
-            color: #2ecb70;
-        }
-        
-        .purchase-status {
-            padding: 6px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            font-weight: bold;
-            text-transform: uppercase;
-        }
-        
-        .status-completado {
-            background: #d4edda;
-            color: #155724;
-        }
-        
-        .purchase-items {
-            padding: 0;
-        }
-        
-        .purchase-item {
-            display: flex;
-            align-items: center;
-            padding: 15px 20px;
-            border-bottom: 1px solid #f0f0f0;
-        }
-        
-        .purchase-item:last-child {
-            border-bottom: none;
-        }
-        
-        .item-image {
-            width: 60px;
-            height: 60px;
-            border-radius: 8px;
-            overflow: hidden;
-            margin-right: 15px;
-            background: #f8f9fa;
-        }
-        
-        .item-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .item-details {
-            flex: 1;
-        }
-        
-        .item-name {
-            font-weight: 600;
-            color: #333;
-            margin-bottom: 5px;
-        }
-        
-        .item-quantity {
-            color: #666;
-            font-size: 14px;
-        }
-        
-        .item-price {
-            font-weight: bold;
-            color: #2ecb70;
-        }
-        
-        .loading-state {
-            text-align: center;
-            padding: 40px;
-            color: #666;
-        }
-        
-        .empty-state {
-            text-align: center;
-            padding: 60px 20px;
-            color: #666;
-        }
-        
-        .empty-state i {
-            font-size: 48px;
-            margin-bottom: 20px;
-            color: #ddd;
-        }
-        
-        .back-button {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            padding: 10px 20px;
-            background: #6c757d;
-            color: white;
-            text-decoration: none;
-            border-radius: 6px;
-            margin-bottom: 20px;
-            transition: background-color 0.3s;
-        }
-        
-        .back-button:hover {
-            background: #5a6268;
-            color: white;
-            text-decoration: none;
-        }
-    </style>
+    <link rel="stylesheet" href="../../public/css/mis_compras.css">
 </head>
 <body>
     <div class="purchases-container">
@@ -280,7 +139,7 @@ $apellidoUsuario = $usuario['apellido'];
                                         </div>
                                         <div class="item-details">
                                             <div class="item-name">${item.nombre}</div>
-                                            <div class="item-quantity">Cantidad: ${item.cantidad}</div>
+                                            <div class="item-quantity">Cantidad: ${item.cantidad_producto}</div>
                                         </div>
                                         <div class="item-price">${formatPrice(item.subtotal)}</div>
                                     </div>
