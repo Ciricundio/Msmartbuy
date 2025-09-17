@@ -44,20 +44,6 @@ try {
         $total += $precioFinal * $row['cantidad'];
     }
 
-    // Simular preferencia de pago (en producción usar SDK de Mercado Pago)
-    $preference = [
-        'id' => 'PREF_' . time() . '_' . $userId,
-        'items' => $items,
-        'total' => $total,
-        'back_urls' => [
-            'success' => 'https://msmartbuy.com/confirmarPago.php',
-            'failure' => 'https://msmartbuy.com/pagoFallido.php',
-            'pending' => 'https://msmartbuy.com/pagoPendiente.php'
-        ],
-        'auto_return' => 'approved',
-        'notification_url' => 'https://msmartbuy.com/webhook.php'
-    ];
-
     echo json_encode([
         'success' => true,
         'data' => $preference
