@@ -836,7 +836,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 let response;
                 if (isInFavorites) {
                     // Remove from favorites
-                    response = await makeAjaxRequest('../../quitarFavorito.php', `product_id=${productId}`);
+                    response = await makeAjaxRequest('../../controller/favorito/quitarFavorito.php', `product_id=${productId}`);
 
                     if (response.success) {
                         icon.classList.remove('fas');
@@ -847,7 +847,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     }
                 } else {
                     // Add to favorites
-                    response = await makeAjaxRequest('../../agregarFavorito.php', `product_id=${productId}`);
+                    response = await makeAjaxRequest('../../controller/favorito/agregarFavorito.php', `product_id=${productId}`);
 
                     if (response.success) {
                         icon.classList.remove('far');
