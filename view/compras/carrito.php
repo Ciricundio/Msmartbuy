@@ -115,8 +115,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                             </a>
                         </div>
                     <?php else: ?>
-                        <form method="POST" action="carrito.php">
-                            <?php foreach ($productos as $producto): ?>
+                        <?php foreach ($productos as $producto): ?>
+                            <form method="POST" action="carrito.php">
                                 <div class="product-card p-3 d-flex align-items-center">
                                     <div class="position-relative me-3">
                                         <img src="../../public/img/products/<?= htmlspecialchars($producto['foto']) ?>"
@@ -155,10 +155,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <input type="hidden" name="producto_id" value="<?= $producto['ID'] ?>">
                                     </div>
                                 </div>
-                            <?php endforeach; ?>
+                            </form>
+                        <?php endforeach; ?>
 
 
-                        </form>
+
                     <?php endif; ?>
                 </div>
             </div>
