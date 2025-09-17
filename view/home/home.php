@@ -2,9 +2,9 @@
 session_start();
 require '../../config/conexion.php';
 
-// Validar que exista la sesión obligatoria
+// Validar que exista la sesiÃ³n obligatoria
 if (!isset($_SESSION['ID'])) {
-    // En producción podrías redirigir al login
+    // En producciÃ³n podrÃ­as redirigir al login
     header('Location: ../../view/auth/login.php');
 }
 
@@ -27,7 +27,7 @@ $apellidoUsuario = $usuario['apellido'];
 
 
 
-// Consulta de productos en promoción
+// Consulta de productos en promociÃ³n
 $sql = "SELECT * FROM producto WHERE descuento > 0 AND estado = 'Disponible' ORDER BY descuento DESC LIMIT 8";
 $stmt = $conn->query($sql);
 $productos = $stmt->fetch_all(MYSQLI_ASSOC);
@@ -396,7 +396,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     <div class="search-container bordear">
                         <div class="search-box">
                             <i class="fas fa-search"></i>
-                            <input class="bordear" type="text" placeholder="Busca tu producto aquí..." id="product-search">
+                            <input class="bordear" type="text" placeholder="Busca tu producto aquí­..." id="product-search">
                         </div>
                     </div>
 
@@ -407,7 +407,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             <div class="hero-banner">
                 <div class="hero-content">
                     <h1 class="hero-title">¡Hola, <?php echo $nombreUsuario ?>!</h1>
-                    <p class="hero-subtitle">Aquí encontrarás todo lo que quieras!</p>
+                    <p class="hero-subtitle">Aquí­ encontrarás todo lo que quieras!</p>
                 </div>
                 <div class="hero-image">
                     <div class="hero-avatar">
@@ -419,7 +419,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             <!-- Product Categories -->
             <div class="section">
 
-                <h2 class="section-title">Producto específico</h2>
+                <h2 class="section-title">Producto especí­fico</h2>
                 <div class="category-grid">
                     <div class="category-card">
                         <i class="fas fa-box"></i>
@@ -435,7 +435,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                     </div>
                     <div class="category-card">
                         <i class="fas fa-truck"></i>
-                        <span>Envío</span>
+                        <span>Enví­o</span>
                     </div>
                 </div>
             </div>
@@ -468,7 +468,10 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                                             <span class="fw-bold">$ <?= number_format($p['precio_unitario'], 0, ',', '.') ?></span>
                                         <?php endif; ?>
                                     </div>
-                                    <button class="add-button" id="btn-product-<?= $p['ID'] ?>" onclick="event.stopPropagation(); toggleCartProduct(<?= $p['ID'] ?>, this)">
+                                    <button class="add-button" 
+                                            id="btn-product-<?= $p['ID'] ?>-descuentos" 
+                                            data-product-id="<?= $p['ID'] ?>"
+                                            onclick="event.stopPropagation(); toggleCartProduct(<?= $p['ID'] ?>, this)">
                                         <span class="btn-text">Agregar 🛒</span>
                                     </button>
                                 </div>
@@ -478,7 +481,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 </div>
             </section>
 
-            <!-- Sección de Productos Nuevos -->
+            <!-- SecciÃ³n de Productos Nuevos -->
             <?php
             $sqlNuevos = "SELECT * FROM producto WHERE estado = 'Disponible' ORDER BY ID DESC LIMIT 12";
             $stmtNuevos = $conn->query($sqlNuevos);
@@ -513,7 +516,10 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                                             <span class="fw-bold">$ <?= number_format($p['precio_unitario'], 0, ',', '.') ?></span>
                                         <?php endif; ?>
                                     </div>
-                                    <button class="add-button" id="btn-product-<?= $p['ID'] ?>" onclick="event.stopPropagation(); toggleCartProduct(<?= $p['ID'] ?>, this)">
+                                    <button class="add-button" 
+                                            id="btn-product-<?= $p['ID'] ?>-nuevos" 
+                                            data-product-id="<?= $p['ID'] ?>"
+                                            onclick="event.stopPropagation(); toggleCartProduct(<?= $p['ID'] ?>, this)">
                                         <span class="btn-text">Agregar 🛒</span>
                                     </button>
                                 </div>
@@ -523,7 +529,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                 </div>
             </section>
 
-            <!-- Sección de Productos Populares -->
+            <!-- SecciÃ³n de Productos Populares -->
             <?php
             $sqlPopulares = "SELECT p.*, COUNT(cp.producto_ID) as veces_comprado 
                            FROM producto p 
@@ -564,7 +570,10 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                                             <span class="fw-bold">$ <?= number_format($p['precio_unitario'], 0, ',', '.') ?></span>
                                         <?php endif; ?>
                                     </div>
-                                    <button class="add-button" id="btn-product-<?= $p['ID'] ?>" onclick="event.stopPropagation(); toggleCartProduct(<?= $p['ID'] ?>, this)">
+                                    <button class="add-button" 
+                                            id="btn-product-<?= $p['ID'] ?>-populares" 
+                                            data-product-id="<?= $p['ID'] ?>"
+                                            onclick="event.stopPropagation(); toggleCartProduct(<?= $p['ID'] ?>, this)">
                                         <span class="btn-text">Agregar 🛒</span>
                                     </button>
                                 </div>
@@ -701,9 +710,82 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
     <script src="../../public/js/product-search.js"></script>
     <script src="../../controller/dashboard/home.js"></script>
 
-    <!-- Toggle Cart Product Functionality -->
+    <!-- JavaScript con sincronización mejorada de botones de carrito -->
     <script>
-        // Function to make AJAX request with proper session handling
+        // Función para actualizar TODOS los botones de carrito del mismo producto
+        function updateAllProductButtons(productId, isInCart) {
+            // Buscar TODOS los botones del mismo producto usando data-product-id
+            const allButtons = document.querySelectorAll(`[data-product-id="${productId}"]`);
+            
+            allButtons.forEach(button => {
+                // Solo actualizar botones de carrito (que tienen btn-text)
+                const btnText = button.querySelector('.btn-text');
+                if (btnText) {
+                    if (isInCart) {
+                        btnText.textContent = 'Agregado ✓';
+                        button.style.backgroundColor = '#ffc107';
+                        button.style.color = '#212529';
+                    } else {
+                        btnText.textContent = 'Agregar 🛒';
+                        button.style.backgroundColor = '#2ecb70';
+                        button.style.color = 'white';
+                    }
+                }
+            });
+        }
+
+        // Función mejorada para toggle de producto en carrito
+        async function toggleCartProduct(productId, buttonElement) {
+            const btnText = buttonElement.querySelector('.btn-text');
+            const isInCart = btnText.textContent.includes('Agregado');
+
+            // Deshabilitar TODOS los botones de carrito del mismo producto durante la operación
+            const allButtons = document.querySelectorAll(`[data-product-id="${productId}"]`);
+            allButtons.forEach(btn => {
+                const text = btn.querySelector('.btn-text');
+                if (text) { // Solo deshabilitar botones de carrito
+                    btn.disabled = true;
+                    text.textContent = isInCart ? 'Eliminando...' : 'Agregando...';
+                }
+            });
+
+            try {
+                let response;
+                if (isInCart) {
+                    // Remover del carrito
+                    response = await makeAjaxRequest('../../controller/carrito/quitarDelCarrito.php', `product_id=${productId}`);
+
+                    if (response.success) {
+                        updateAllProductButtons(productId, false);
+                    } else {
+                        throw new Error(response.message || 'Error al eliminar del carrito');
+                    }
+                } else {
+                    // Agregar al carrito
+                    response = await makeAjaxRequest('../../controller/carrito/agregarAlCarrito.php', `product_id=${productId}&quantity=1`);
+
+                    if (response.success) {
+                        updateAllProductButtons(productId, true);
+                    } else {
+                        throw new Error(response.message || 'Error al agregar al carrito');
+                    }
+                }
+            } catch (error) {
+                console.error('Error:', error);
+                alert(error.message);
+                // Restaurar estado original en caso de error
+                updateAllProductButtons(productId, isInCart);
+            } finally {
+                // Rehabilitar todos los botones de carrito del producto
+                allButtons.forEach(btn => {
+                    const text = btn.querySelector('.btn-text');
+                    if (text) { // Solo rehabilitar botones de carrito
+                        btn.disabled = false;
+                    }
+                });
+            }
+        }
+
         function makeAjaxRequest(url, data) {
             return new Promise((resolve, reject) => {
                 const xhr = new XMLHttpRequest();
@@ -734,59 +816,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             });
         }
 
-        // Function to toggle product in cart
-        async function toggleCartProduct(productId, buttonElement) {
-            const btnText = buttonElement.querySelector('.btn-text');
-            const isInCart = btnText.textContent.includes('Agregado');
-
-            // Disable button during request
-            buttonElement.disabled = true;
-            btnText.textContent = isInCart ? 'Eliminando...' : 'Agregando...';
-
-            try {
-                let response;
-                if (isInCart) {
-                    // Remove from cart
-                    response = await makeAjaxRequest('../../controller/carrito/quitarDelCarrito.php', `product_id=${productId}`);
-
-                    if (response.success) {
-                        btnText.textContent = 'Agregar 🛒';
-                        buttonElement.style.backgroundColor = '#2ecb70';
-                        buttonElement.style.color = 'white';
-                    } else {
-                        throw new Error(response.message || 'Error al eliminar del carrito');
-                    }
-                } else {
-                    // Add to cart
-                    response = await makeAjaxRequest('../../controller/carrito/agregarAlCarrito.php', `product_id=${productId}&quantity=1`);
-
-                    if (response.success) {
-                        btnText.textContent = 'Agregado ✓';
-                        buttonElement.style.backgroundColor = '#ffc107';
-                        buttonElement.style.color = '#212529';
-                    } else {
-                        throw new Error(response.message || 'Error al agregar al carrito');
-                    }
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                alert(error.message);
-                // Restore original state on error
-                btnText.textContent = isInCart ? 'Agregado ✓' : 'Agregar 🛒';
-                buttonElement.style.backgroundColor = isInCart ? '#ffc107' : '#2ecb70';
-                buttonElement.style.color = isInCart ? '#212529' : 'white';
-            } finally {
-                buttonElement.disabled = false;
-            }
-        }
-
-        // Initialize button states on page load
-        document.addEventListener('DOMContentLoaded', function() {
-            // Check cart status for all products and update button states
-            checkCartStatus();
-        });
-
-        // Function to check which products are in cart
+        // Función para verificar estado del carrito y actualizar todos los botones
         async function checkCartStatus() {
             try {
                 const xhr = new XMLHttpRequest();
@@ -801,15 +831,9 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
                             if (data.success && data.data.length > 0) {
                                 const cartProductIds = data.data.map(item => item.ID);
 
-                                // Update button states for products in cart
+                                // Actualizar TODOS los botones para cada producto en el carrito
                                 cartProductIds.forEach(productId => {
-                                    const button = document.getElementById(`btn-product-${productId}`);
-                                    if (button) {
-                                        const btnText = button.querySelector('.btn-text');
-                                        btnText.textContent = 'Agregado ✓';
-                                        button.style.backgroundColor = '#ffc107';
-                                        button.style.color = '#212529';
-                                    }
+                                    updateAllProductButtons(productId, true);
                                 });
                             }
                         } catch (e) {
@@ -824,7 +848,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             }
         }
 
-        // Function to toggle product in favorites
+        // Function to toggle product in favorites (sin cambios)
         async function toggleFavoriteProduct(productId, buttonElement) {
             const icon = buttonElement.querySelector('i');
             const isInFavorites = icon.classList.contains('fas');
@@ -866,7 +890,7 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             }
         }
 
-        // Function to check which products are in favorites
+        // Function to check which products are in favorites (sin cambios)
         async function checkFavoritesStatus() {
             try {
                 const xhr = new XMLHttpRequest();
@@ -906,12 +930,17 @@ $productos = $stmt->fetch_all(MYSQLI_ASSOC);
             }
         }
 
-        // Initialize favorites status on page load
+        // Initialize button states on page load
         document.addEventListener('DOMContentLoaded', function() {
+            console.log('Inicializando estados de productos...');
+            
+            // Check cart status for all products and update button states
+            checkCartStatus();
+            
             // Check favorites status for all products and update button states
             setTimeout(() => {
                 checkFavoritesStatus();
-            }, 1000);
+            }, 500);
         });
 
         // Note: Modal functionality is handled by product-search.js
