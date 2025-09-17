@@ -60,7 +60,7 @@ class ProductSearch {
         }
 
         try {
-            const response = await fetch(`../../buscarProducto.php?search=${encodeURIComponent(query)}`);
+            const response = await fetch(`../../controller/buscarProducto.php?search=${encodeURIComponent(query)}`);
             const data = await response.json();
             
             if (data.success && data.data.length > 0) {
@@ -316,7 +316,7 @@ class ProductModal {
 
     async addToCart() {
         try {
-            const response = await fetch('../../agregarAlCarrito.php', {
+            const response = await fetch('../../controller/carrito/agregarAlCarrito.php', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/x-www-form-urlencoded',
@@ -361,7 +361,7 @@ function openProductModal(product) {
 
 // Global function to open product detail
 function openProductDetail(productId) {
-    fetch(`../../detalleProducto.php?id=${productId}`)
+    fetch(`../../controller/detalleProducto.php?id=${productId}`)
         .then(response => response.json())
         .then(data => {
             if (data.success) {

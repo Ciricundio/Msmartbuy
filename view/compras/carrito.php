@@ -229,7 +229,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         document.getElementById('finalizar_compra').addEventListener('click', async () => {
             // Obtener productos del carrito (puedes usar AJAX a listarCarrito.php)
-            const res = await fetch('../../listarCarrito.php');
+            const res = await fetch('../../controller/carrito/listarCarrito.php');
             const productos = await res.json();
 
             if (productos.error || productos.length === 0) {

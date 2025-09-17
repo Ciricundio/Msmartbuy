@@ -485,7 +485,7 @@ if ($userId <= 0) {
                                         Agregar al Carrito
                                     </span>
                                 </button>
-                                <a href="../../detalleProducto.php?id=<?php echo $product['ID']; ?>" class="btn btn-secondary">
+                                <a href="../../controller/detalleProducto.php?id=<?php echo $product['ID']; ?>" class="btn btn-secondary">
                                     <i class="fas fa-eye"></i>
                                     Ver
                                 </a>
@@ -610,7 +610,7 @@ if ($userId <= 0) {
                 let response;
                 if (isInCart) {
                     // Remove from cart
-                    response = await makeAjaxRequest('../../quitarDelCarrito.php', `product_id=${productId}`);
+                    response = await makeAjaxRequest('../../controller/carrito/quitarDelCarrito.php', `product_id=${productId}`);
 
                     if (response.success) {
                         btnText.innerHTML = '<i class="fas fa-shopping-cart"></i> Agregar al Carrito';
@@ -621,7 +621,7 @@ if ($userId <= 0) {
                     }
                 } else {
                     // Add to cart
-                    response = await makeAjaxRequest('../../agregarAlCarrito.php', `product_id=${productId}&quantity=1`);
+                    response = await makeAjaxRequest('../../controller/carrito/agregarAlCarrito.php', `product_id=${productId}&quantity=1`);
 
                     if (response.success) {
                         btnText.innerHTML = '<i class="fas fa-check"></i> Agregado al Carrito';
@@ -645,7 +645,7 @@ if ($userId <= 0) {
         async function checkCartStatus() {
             try {
                 const xhr = new XMLHttpRequest();
-                xhr.open('GET', '../../listarCarrito.php', true);
+                xhr.open('GET', '../../controller/carrito/listarCarrito.php', true);
                 xhr.setRequestHeader('X-Requested-With', 'XMLHttpRequest');
 
                 xhr.onreadystatechange = function() {
