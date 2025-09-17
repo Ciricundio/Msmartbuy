@@ -1,0 +1,150 @@
+body {
+    font-family: 'Segoe UI', Arial, sans-serif;
+    background: #f9fafb;
+    margin: 0;
+    padding: 40px;
+    color: #111827;
+}
+
+h1 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 30px;
+    color: #111827;
+}
+
+h1::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 3px;
+    background: #2ECB70;
+    margin: 10px auto 0;
+    border-radius: 2px;
+}
+
+.checkout-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 30px;
+    max-width: 1100px;
+    margin: auto;
+}
+
+.card {
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+.card h2 {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 16px;
+    display: flex;
+    align-items: center;
+}
+
+.card h2::before {
+    content: "•";
+    color: #2ECB70;
+    font-size: 28px;
+    margin-right: 8px;
+    line-height: 1;
+}
+
+.producto {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+    font-size: 15px;
+}
+
+.producto small {
+    display: block;
+    color: #6b7280;
+    font-size: 13px;
+}
+
+.totales {
+    margin-top: 15px;
+    border-top: 1px solid #e5e7eb;
+    padding-top: 12px;
+    font-size: 15px;
+}
+
+.totales div {
+    display: flex;
+    justify-content: space-between;
+    margin: 6px 0;
+}
+
+.totales strong {
+    color: #2ECB70;
+    font-size: 16px;
+}
+
+label {
+    font-size: 14px;
+    font-weight: 500;
+    display: block;
+    margin-top: 10px;
+    margin-bottom: 4px;
+}
+
+select,
+input,
+textarea {
+    width: 100%;
+    border: 1px solid #d1d5db;
+    border-radius: 8px;
+    padding: 10px;
+    font-size: 14px;
+    margin-bottom: 10px;
+    transition: border 0.2s;
+}
+
+select:focus,
+input:focus,
+textarea:focus {
+    outline: none;
+    border-color: #2ECB70;
+    box-shadow: 0 0 0 2px rgba(46, 203, 112, 0.2);
+}
+
+button {
+    width: 100%;
+    background: #2ECB70;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 14px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #26a85d;
+}
+
+button:disabled {
+    background: #9ca3af;
+    cursor: not-allowed;
+}
+
+#mensaje {
+    text-align: center;
+    margin-top: 20px;
+    font-weight: bold;
+}
+
+.checkout-footer {
+    margin-top: 30px;
+    text-align: center;
+    color: #6b7280;
+    font-size: 13px;
+}
