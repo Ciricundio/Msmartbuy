@@ -10,7 +10,7 @@ try {
         throw new Exception("Usuario no autenticado");
     }
 
-    $sql = "SELECT f.ID, f.fecha, f.total, f.estado, f.payment_id,
+    $sql = "SELECT f.ID, f.fecha, f.total, f.estado,
                    GROUP_CONCAT(DISTINCT p.nombre SEPARATOR ', ') as productos,
                    COUNT(DISTINCT df.producto_ID) as total_productos
             FROM factura f
@@ -18,7 +18,7 @@ try {
             JOIN producto p ON df.producto_ID = p.ID
             WHERE f.usuario_ID = ?
             GROUP BY f.ID
-            ORDER BY f.fecha DESC";
+            ORDER BY f.ID DESC";
 
     $stmt = $conn->prepare($sql);
     $stmt->bind_param("i", $userId);
@@ -28,7 +28,7 @@ try {
     $purchases = [];
     while ($row = $result->fetch_assoc()) {
         // Obtener detalles de cada factura
-        $detailsSql = "SELECT df.producto_ID, p.nombre, p.foto, df.cantidad, df.precio_unitario, df.subtotal
+        $detailsSql = "SELECT df.producto_ID, p.nombre, p.foto, df.cantidad_producto, df.subtotal
                         FROM detalle_factura df
                         JOIN producto p ON df.producto_ID = p.ID
                         WHERE df.factura_ID = ?";
