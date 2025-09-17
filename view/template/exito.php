@@ -78,6 +78,6 @@
      Si llegas a tener inconvenientes no dudes en reportarnos por el “Soporte”.</p>
 
   <a href="../compras/mis_compras.php" class="btn btn-gray">MIS COMPRAS</a>
-  <a href="../home/home.php" class="btn btn-green">Inicio</a>
+  <a href="../home/home.php" class="btn btn-green">INICIO</a>
 </body>
 </html>
