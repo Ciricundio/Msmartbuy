@@ -58,16 +58,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $stmt->execute();
         header("Location: carrito.php");
         exit();
-    } elseif (isset($_POST['finalizar_compra'])) {
-        // Procesar compra
-        require_once '../../controller/pago/crearPreferenciaPago.php';
-        exit();
     }
 }
 
 ?>
 <!DOCTYPE html>
 <html lang="es">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -75,78 +72,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <link rel="icon" href="../../public/img/Icono/Icon_cnt.svg">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        :root {
-            --primary-color: #2ecb70;
-            --secondary-color: #f8f9fa;
-            --danger-color: #e74c3c;
-        }
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f5f5f5;
-        }
-        .navbar {
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-        }
-        .cart-container {
-            background: white;
-            border-radius: 10px;
-            box-shadow: 0 0 20px rgba(0,0,0,0.05);
-        }
-        .product-card {
-            transition: all 0.3s ease;
-            border-bottom: 1px solid #eee;
-        }
-        .product-card:hover {
-            background-color: #fafafa;
-        }
-        .product-img {
-            width: 100px;
-            height: 100px;
-            object-fit: contain;
-            border-radius: 8px;
-        }
-        .quantity-input {
-            width: 60px;
-            text-align: center;
-        }
-        .btn-outline-danger:hover {
-            background-color: var(--danger-color);
-            color: white;
-        }
-        .summary-card {
-            position: sticky;
-            top: 20px;
-        }
-        .discount-badge {
-            position: absolute;
-            top: 5px;
-            left: 5px;
-            background-color: var(--danger-color);
-            color: white;
-            font-size: 12px;
-            padding: 2px 6px;
-            border-radius: 4px;
-        }
-        .btn-checkout {
-            background-color: var(--primary-color);
-            border: none;
-            padding: 12px 0;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        .btn-checkout:hover {
-            background-color: #24a159;
-        }
-        .empty-cart {
-            height: 60vh;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-        }
-    </style>
+    <link rel="stylesheet" href="../../public/css/carrito.css">
 </head>
+
 <body>
     <!-- Navbar -->
     <nav class="navbar navbar-expand-lg navbar-light bg-white">
@@ -161,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 </a>
                 <a href="#" class="btn btn-outline-primary position-relative">
                     <i class="fas fa-shopping-cart"></i>
-                    <?php if(count($productos) > 0): ?>
+                    <?php if (count($productos) > 0): ?>
                         <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger">
                             <?= count($productos) ?>
                         </span>
@@ -176,8 +104,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <div class="col-lg-8">
                 <div class="cart-container p-4 mb-4">
                     <h2 class="fw-bold mb-4">Mi Carrito</h2>
-                    
-                    <?php if(empty($productos)): ?>
+
+                    <?php if (empty($productos)): ?>
                         <div class="empty-cart text-center">
                             <i class="fas fa-shopping-cart fa-4x mb-3 text-muted"></i>
                             <h3 class="mb-3">Tu carrito está vacío</h3>
@@ -188,13 +116,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                         </div>
                     <?php else: ?>
                         <form method="POST" action="carrito.php">
-                            <?php foreach($productos as $producto): ?>
+                            <?php foreach ($productos as $producto): ?>
                                 <div class="product-card p-3 d-flex align-items-center">
                                     <div class="position-relative me-3">
-                                        <img src="../../public/img/products/<?= htmlspecialchars($producto['foto'])?>" 
-                                             alt="<?= htmlspecialchars($producto['nombre']) ?>" 
-                                             class="product-img">
-                                        <?php if($producto['descuento'] > 0): ?>
+                                        <img src="../../public/img/products/<?= htmlspecialchars($producto['foto']) ?>"
+                                            alt="<?= htmlspecialchars($producto['nombre']) ?>"
+                                            class="product-img">
+                                        <?php if ($producto['descuento'] > 0): ?>
                                             <span class="discount-badge">-<?= $producto['descuento'] ?>%</span>
                                         <?php endif; ?>
                                     </div>
@@ -204,11 +132,11 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <div class="d-flex align-items-center">
                                             <div class="input-group me-3" style="width: 120px;">
                                                 <button class="btn btn-outline-secondary decrement" type="button">-</button>
-                                                <input type="number" 
-                                                       name="cantidad[<?= $producto['ID'] ?>]" 
-                                                       value="<?= $producto['cantidad'] ?>" 
-                                                       min="1" 
-                                                       class="form-control text-center quantity-input">
+                                                <input type="number"
+                                                    name="cantidad[<?= $producto['ID'] ?>]"
+                                                    value="<?= $producto['cantidad'] ?>"
+                                                    min="1"
+                                                    class="form-control text-center quantity-input">
                                                 <button class="btn btn-outline-secondary increment" type="button">+</button>
                                             </div>
                                             <div class="text-end">
@@ -218,56 +146,56 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         </div>
                                     </div>
                                     <div class="ms-3">
-                                        <button type="submit" 
-                                                name="eliminar_producto" 
-                                                class="btn btn-outline-danger btn-sm"
-                                                onclick="return confirm('¿Estás seguro de eliminar este producto?')">
+                                        <button type="submit"
+                                            name="eliminar_producto"
+                                            class="btn btn-outline-danger btn-sm"
+                                            onclick="return confirm('¿Estás seguro de eliminar este producto?')">
                                             <i class="fas fa-trash"></i>
                                         </button>
                                         <input type="hidden" name="producto_id" value="<?= $producto['ID'] ?>">
                                     </div>
                                 </div>
                             <?php endforeach; ?>
-                            
+
 
                         </form>
                     <?php endif; ?>
                 </div>
             </div>
-            
-            <?php if(!empty($productos)): ?>
-            <div class="col-lg-4">
-                <div class="cart-container p-4 summary-card">
-                    <h3 class="fw-bold mb-4">Resumen de compra</h3>
-                    
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span>Subtotal:</span>
-                        <span class="fw-bold">$<?= number_format($total, 0, ',', '.') ?></span>
-                    </div>
-                    
-                    <div class="mb-3 d-flex justify-content-between">
-                        <span>Envío:</span>
-                        <span class="fw-bold">$0</span>
-                    </div>
-                    
-                    <hr>
-                    
-                    <div class="mb-4 d-flex justify-content-between">
-                        <span class="fw-bold">Total:</span>
-                        <span class="fw-bold text-success">$<?= number_format($total, 0, ',', '.') ?></span>
-                    </div>
-                    
-                    <form method="POST" action="carrito.php">
-                        <button type="submit" name="finalizar_compra" class="btn btn-checkout btn-lg w-100 text-white">
-                            <i class="fas fa-credit-card me-2"></i> Realizar pago
-                        </button>
-                    </form>
-                    
-                    <div class="mt-3 small text-muted">
-                        <i class="fas fa-lock me-2"></i> Tu información está protegida
+
+            <?php if (!empty($productos)): ?>
+                <div class="col-lg-4">
+                    <div class="cart-container p-4 summary-card">
+                        <h3 class="fw-bold mb-4">Resumen de compra</h3>
+
+                        <div class="mb-3 d-flex justify-content-between">
+                            <span>Subtotal:</span>
+                            <span class="fw-bold">$<?= number_format($total, 0, ',', '.') ?></span>
+                        </div>
+
+                        <div class="mb-3 d-flex justify-content-between">
+                            <span>Envío:</span>
+                            <span class="fw-bold">$0</span>
+                        </div>
+
+                        <hr>
+
+                        <div class="mb-4 d-flex justify-content-between">
+                            <span class="fw-bold">Total:</span>
+                            <span class="fw-bold text-success">$<?= number_format($total, 0, ',', '.') ?></span>
+                        </div>
+
+                        <form method="POST" action="carrito.php">
+                            <button type="submit" name="finalizar_compra" id="finalizar_compra" class="btn btn-checkout btn-lg w-100 text-white">
+                                <i class="fas fa-credit-card me-2"></i> Realizar pago
+                            </button>
+                        </form>
+
+                        <div class="mt-3 small text-muted">
+                            <i class="fas fa-lock me-2"></i> Tu información está protegida
+                        </div>
                     </div>
                 </div>
-            </div>
             <?php endif; ?>
         </div>
     </div>
@@ -297,6 +225,32 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 if (this.value < 1) this.value = 1;
             });
         });
+
+        document.getElementById('finalizar_compra').addEventListener('click', async () => {
+            // Obtener productos del carrito (puedes usar AJAX a listarCarrito.php)
+            const res = await fetch('../../listarCarrito.php');
+            const productos = await res.json();
+
+            if (productos.error || productos.length === 0) {
+                alert('No hay productos en el carrito para comprar.');
+                return;
+            }
+
+            // Crear formulario para enviar POST con JSON a confirmarCompra.php
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '../../controller/pago/confirmarCompra.php';
+
+            const input = document.createElement('input');
+            input.type = 'hidden';
+            input.name = 'productos';
+            input.value = JSON.stringify(productos);
+
+            form.appendChild(input);
+            document.body.appendChild(form);
+            form.submit();
+        });
     </script>
 </body>
+
 </html>
