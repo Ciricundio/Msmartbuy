@@ -566,7 +566,7 @@ if ($userId <= 0) {
                 buttonElement.disabled = true;
                 
                 try {
-                    const response = await makeAjaxRequest('../../quitarFavorito.php', `product_id=${productId}`);
+                    const response = await makeAjaxRequest('../../controller/favorito/quitarFavorito.php', `product_id=${productId}`);
                     
                     if (response.success) {
                         // Find and remove the product card
