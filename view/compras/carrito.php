@@ -131,13 +131,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                                         <p class="text-muted small mb-1"><?= htmlspecialchars($producto['marca']) ?></p>
                                         <div class="d-flex align-items-center">
                                             <div class="input-group me-3" style="width: 120px;">
-                                                <button class="btn btn-outline-secondary decrement" type="button">-</button>
+                                                
                                                 <input type="number"
                                                     name="cantidad[<?= $producto['ID'] ?>]"
                                                     value="<?= $producto['cantidad'] ?>"
                                                     min="1"
                                                     class="form-control text-center quantity-input">
-                                                <button class="btn btn-outline-secondary increment" type="button">+</button>
+                                                
                                             </div>
                                             <div class="text-end">
                                                 <span class="fw-bold">$<?= number_format($producto['cantidad'] * $producto['precio_final'], 0, ',', '.') ?></span>
