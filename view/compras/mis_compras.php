@@ -84,7 +84,7 @@ $apellidoUsuario = $usuario['apellido'];
         // Cargar compras
         async function loadPurchases() {
             try {
-                const response = await fetch('../../listarCompras.php', {
+                const response = await fetch('../../controller/pago/listarCompras.php', {
                     method: 'GET',
                     headers: {
                         'X-Requested-With': 'XMLHttpRequest'
