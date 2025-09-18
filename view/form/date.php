@@ -28,7 +28,7 @@
 
             <div class="">
             <!-- recuadro de opciones -->
-                <form action="../../model/Auth/signup.php" method="POST" onsubmit="return enviarFecha()">
+                <form action="../../model/auth/signup.php" method="POST" onsubmit="return enviarFecha()">
                     <div class="picker-wrapper">
                         <div class="highlight">
                         </div>

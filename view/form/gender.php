@@ -26,7 +26,7 @@
             </div>
         </div>
 <!-- recuadro de opciones -->
-        <form action="../../model/Auth/signup.php" method="post">
+        <form action="../../model/auth/signup.php" method="post">
 
             <div class="row flex-column">
 <!-- cuadro de la opción cliente -->
