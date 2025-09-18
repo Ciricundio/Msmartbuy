@@ -124,7 +124,7 @@
                             </a>
                         </div>
                         
-                        <a href="login.html" class="signup-text">Ya tengo cuenta</a>
+                        <a href="login.php" class="signup-text">Ya tengo cuenta</a>
     
                     </div>
 
