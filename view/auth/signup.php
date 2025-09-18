@@ -34,7 +34,7 @@
                 <div class="container-right">
                     <h2 class="d-md-block d-none mt-4 text-center">Regístrate</h2>
 
-                    <form action="../../model/Auth/signup.php" method="POST">
+                    <form action="../../model/auth/signup.php" method="POST">
                         <div class="p-4 border formulario bg-white">
                         
                             <div class="input">
